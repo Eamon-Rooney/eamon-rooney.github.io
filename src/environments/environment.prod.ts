@@ -1,3 +1,7 @@
 export const environment = {
-  production: true
+  production: true,
+
+  drupal: {
+    articles: 'https://dev-eamonrooney.pantheonsite.io/jsonapi/node/article',
+  }
 };

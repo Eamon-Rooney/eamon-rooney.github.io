@@ -1,0 +1,8 @@
+{
+  "/jsonapi/*": {
+    "target": "https://dev-eamonrooney.pantheonsite.io",
+    "secure": true,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
