@@ -1,0 +1,27 @@
+:host {
+  ul {
+    margin-top: 0;
+  }
+  li {
+    list-style: none;
+    display: inline-block;
+    width: 21%;
+    padding: 50px;
+    margin: 0 40px 40px 0;
+    border-top: 2px solid darkslategray;
+    border-bottom: 2px solid darkslategray;
+    background-color: white;
+    text-align: center;
+  }
+  a {
+    color: #1d70b8;
+    text-decoration: none;
+  }
+  h3 {
+    border-bottom: 2px solid #1d70b8;
+    background-color: #1d70b8;
+    color: darkslategray;
+    text-align: left;
+    padding: 20px 0 20px 50px;
+  }
+}

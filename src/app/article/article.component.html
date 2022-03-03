@@ -1,6 +1,11 @@
+<h3>Articles</h3>
+
 <ul>
   <li *ngFor="let article of this.articles.data; let i = index">
-    <app-card>{{ article.attributes.title }}</app-card>
+    <app-card>
+      <a routerLink="">{{ article.attributes.title }}</a>
+    </app-card>
   </li>
 </ul>
 
+<router-outlet></router-outlet>
