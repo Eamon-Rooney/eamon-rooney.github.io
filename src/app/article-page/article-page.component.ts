@@ -16,7 +16,7 @@ export class ArticlePageComponent implements OnInit {
 
   async ngOnInit() {
     let id = this.router.routerState.snapshot.root.children[0].params.id;
-console.log(id);
+
     (await this._articlePageService.getArticlePage(id))
     .subscribe(response =>
       this.articlePage = response
