@@ -4,11 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
-export class ArticleService {
+export class ArticlePageService {
   constructor(private httpClient: HttpClient) { }
 
-  async getArticles() {
-    console.log(this.httpClient.get(environment.drupal.articles));
-    return this.httpClient.get(environment.drupal.articles);
+  async getArticlePage(id: any) {
+    return this.httpClient.get(environment.drupal.articlePage + id);
   }
 }

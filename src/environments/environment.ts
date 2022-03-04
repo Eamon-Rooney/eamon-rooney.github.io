@@ -7,6 +7,7 @@ export const environment = {
 
   drupal: {
     articles: '/jsonapi/node/article',
+    articlePage: '/jsonapi/node/article/',
   }
 };
 
