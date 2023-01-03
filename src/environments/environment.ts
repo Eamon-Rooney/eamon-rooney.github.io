@@ -2,13 +2,19 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+let corsanywhere: string = 'https://cors-anywhere.herokuapp.com/https://fantasy.premierleague.com/api/';
+
 export const environment = {
   production: false,
 
-  drupal: {
-    articles: '/jsonapi/node/article',
-    articlePage: '/jsonapi/node/article/',
+  fpl: {
+    bootstrap: (corsanywhere + 'bootstrap-static/'),
+    league: (corsanywhere + 'leagues-classic/1051448/standings/'),
+  },
+  team: {
+    picks: (corsanywhere + 'entry/'),
   }
+
 };
 
 /*

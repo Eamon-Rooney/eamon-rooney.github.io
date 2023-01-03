@@ -1,6 +1,6 @@
 {
-  "/jsonapi/*": {
-    "target": "https://dev-eamonrooney.pantheonsite.io",
+  "/api/*": {
+    "target": "https://cors-anywhere.herokuapp.com/https://fantasy.premierleague.com",
     "secure": true,
     "logLevel": "debug",
     "changeOrigin": true
