@@ -1,34 +1,15 @@
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  flex-grow: 3;
-  padding: 0;
-  align-content: flex-start;
-  justify-content: space-around;
-}
 a {
   color: #1d70b8;
   text-decoration: none;
 }
-h1 {
+h1, h2, h3, h4, h5, h6 {
   border-bottom: 2px solid #1d70b8;
   background-color: #1d70b8;
   color: white;
   text-align: left;
   padding: 20px 0 20px 50px;
 }
-h2 {
-  border-bottom: 2px solid #1d70b8;
-  background-color: #1d70b8;
-  color: white;
-  text-align: left;
-  padding: 20px 0 20px 50px;
-}
-h3 {
-  border-bottom: 2px solid #1d70b8;
-  background-color: #1d70b8;
-  color: white;
-  text-align: left;
-  padding: 20px 0 20px 50px;
+
+.ngx-pagination {
+  text-align: center;
 }
