@@ -1,3 +1,21 @@
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 0;
+  align-content: flex-start;
+  align-items: stretch;
+  justify-content: space-around;
+}
+
 li {
   list-style: none;
+
+  ::ng-deep {
+    width: 100%;
+    min-height: 100%;
+    @media (min-width: 768px) {
+      max-width: 33%;
+    }
+  }
 }
