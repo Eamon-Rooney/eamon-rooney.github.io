@@ -9,9 +9,7 @@ export class TeamService {
 
   constructor(private httpClient: HttpClient) { }
 
-  gameweek: number = 19;
-
-  async getTeamPicks(entry: number) {
-    return this.httpClient.get(environment.team.picks + entry + '/event/' + this.gameweek + '/picks/');
+  async getTeamPicks(entry: number, gameweek: number) {
+    return this.httpClient.get(environment.team.picks + entry + '/event/' + gameweek + '/picks/');
   }
 }

@@ -1,5 +1,11 @@
 <h2>Players</h2>
 
+<Label>Gameweek: </Label>
+<!-- <select (ngModelChange)="updateGameweek()" [(ngModel)]="events" > -->
+<select>
+  <option *ngFor="let event of events; let i = index" [ngValue]="event[i]"> {{ event.id }} </option>
+</select>
+
 <ul>
   <li *ngFor="let pick of team?.picks; let i = index">
     <app-card>
