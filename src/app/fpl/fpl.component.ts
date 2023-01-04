@@ -12,6 +12,7 @@ export class FplComponent implements OnInit {
 
   bootstrap: any;
   league: any;
+  p: number = 1;
 
   async ngOnInit() {
 

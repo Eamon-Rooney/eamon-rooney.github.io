@@ -1,7 +1,7 @@
 <h2>Players</h2>
 
 <ul>
-  <li *ngFor="let pick of team.picks; let i = index">
-    <p> {{ pick.element }}</p>
+  <li *ngFor="let pick of team?.picks; let i = index">
+    <p> {{ pick?.element }}</p>
   </li>
 </ul>

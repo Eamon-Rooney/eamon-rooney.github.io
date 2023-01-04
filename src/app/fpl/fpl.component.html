@@ -1,6 +1,6 @@
 <h1>FPL</h1>
 <label>Switch League: </label>
-<input [(ngModel)]="league.league.id" (ngModelChange)="updateLeague()" />
+<input [(ngModel)]="league?.league.id" (ngModelChange)="updateLeague()" />
 
 <!-- <ul>
   <li *ngFor="let player of bootstrap.elements; let i = index">
@@ -8,10 +8,12 @@
   </li>
 </ul> -->
 
-<h2>League Name: {{ league.league.name }}</h2>
+<h2>League Name: {{ league?.league.name }}</h2>
 <ul>
-  <li *ngFor="let user of league.standings.results; let i = index">
-    <a routerLink="/team/{{ user.entry }}">{{ user.player_name }}</a>
+  <li *ngFor="let user of league?.standings.results | paginate: { itemsPerPage: 3, currentPage: p }">
+    <a routerLink="/team/{{ user?.entry }}">{{ user?.player_name }}</a>
   </li>
 </ul>
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
 
