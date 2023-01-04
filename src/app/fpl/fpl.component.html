@@ -10,8 +10,10 @@
 
 <h2>League Name: {{ league?.league.name }}</h2>
 <ul>
-  <li *ngFor="let user of league?.standings.results | paginate: { itemsPerPage: 3, currentPage: p }">
-    <a routerLink="/team/{{ user?.entry }}">{{ user?.player_name }}</a>
+  <li *ngFor="let user of league?.standings.results | paginate: { itemsPerPage: 5, currentPage: p }">
+    <app-card>
+      <a routerLink="/team/{{ user?.entry }}">{{ user?.player_name }}</a>
+    </app-card>
   </li>
 </ul>
 

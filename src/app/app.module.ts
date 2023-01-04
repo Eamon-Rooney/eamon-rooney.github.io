@@ -7,13 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FplComponent } from './fpl/fpl.component';
 import { TeamComponent } from './team/team.component';
+import { CardComponent } from './card/card.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FplComponent,
-    TeamComponent
+    TeamComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
