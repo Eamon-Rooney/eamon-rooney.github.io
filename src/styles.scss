@@ -11,9 +11,9 @@ li {
   list-style: none;
   padding: 50px;
   margin: 0 20px 40px 20px;
-  border-top: 2px solid darkslategray;
-  border-bottom: 2px solid darkslategray;
   background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
   text-align: center;
 }
 a {
