@@ -19,13 +19,13 @@ export class FplComponent implements OnInit {
     (await this._fplService.getFplLeague())
     .subscribe(response => {
       this.league = response;
-      console.log(response);
+      console.log("LEAGUE", response);
     });
 
     (await this._fplService.getFplBootstrap())
     .subscribe(response => {
       this.bootstrap = response;
-      console.log(response);
+      console.log("BOOTSTRAP", response);
     });
   }
 
@@ -33,7 +33,7 @@ export class FplComponent implements OnInit {
     (await this._fplService.updateFplLeague(this.league.league.id))
     .subscribe(response => {
       this.league = response;
-      console.log(response);
+      console.log("UPDATELEAGUE", response);
     });
   }
 }

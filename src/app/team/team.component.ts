@@ -22,7 +22,7 @@ export class TeamComponent implements OnInit {
     (await this._teamService.getTeamPicks(+entry))
     .subscribe(response => {
       this.team = response;
-      console.log(response);
+      console.log("TEAMPICKS", response);
     });
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => {

@@ -4,7 +4,7 @@ import { TeamComponent } from './team/team.component';
 
 const routes: Routes = [
    { path: 'team/:entry', component: TeamComponent },
-   { path: "**", redirectTo: "/app" },
+   { path: "**", redirectTo: "/" },
 ];
 
 @NgModule({
