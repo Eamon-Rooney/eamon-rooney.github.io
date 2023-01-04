@@ -107,5 +107,8 @@
       }
     }
   },
-  "defaultProject": "eamonrooney"
+  "defaultProject": "eamonrooney",
+  "cli": {
+    "analytics": false
+  }
 }
