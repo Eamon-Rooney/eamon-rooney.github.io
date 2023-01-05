@@ -1,4 +1,4 @@
-export interface StandingsResults {
+export interface standingsResults {
   id: number;
   event_total: number;
   player_name: string;
