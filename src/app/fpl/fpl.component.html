@@ -1,6 +1,12 @@
 <h1>FPL</h1>
-<label>Switch League: </label>
-<input [(ngModel)]="league?.league.id" (ngModelChange)="updateLeague()" />
+<form [formGroup]="leagueForm" *ngIf="this.leagueForm">
+  <label>Switch League: </label>
+  <input [(ngModel)]="league?.league.id"
+  (ngModelChange)="updateLeague()"
+  class="form-control"
+  formControlName="league?.league.id"/>
+  <p class="error" *ngIf="leagueForm.controls['league?.league.id'].hasError('pattern') && (leagueForm.controls['league?.league.id'].dirty || leagueForm.controls['league?.league.id'].touched)">Use only numbers in League ID search</p>
+</form>
 
 <!-- <ul>
   <li *ngFor="let player of bootstrap.elements; let i = index">

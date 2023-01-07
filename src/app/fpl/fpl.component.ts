@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FplService } from './fpl.service';
 import { standingsResults } from 'app/interfaces/standings-results';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-fpl',
@@ -9,7 +10,14 @@ import { standingsResults } from 'app/interfaces/standings-results';
 })
 export class FplComponent implements OnInit {
 
-  constructor(private _fplService: FplService) { }
+  leagueForm!: FormGroup;
+
+  constructor(private _fplService: FplService,
+    formBuilder: FormBuilder) {
+      this.leagueForm = formBuilder.group({
+        'league?.league.id': [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]*$/)])],
+      });
+  }
 
   league: any;
   standings: standingsResults[] | any;
