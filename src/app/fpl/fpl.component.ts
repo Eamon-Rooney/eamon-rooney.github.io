@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FplService } from './fpl.service';
 import { standingsResults } from 'app/interfaces/standings-results';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EventList } from 'app/interfaces/events';
 
 @Component({
   selector: 'app-fpl',
@@ -16,6 +17,11 @@ export class FplComponent implements OnInit {
   league: any;
   standings: standingsResults[] | any;
   p: number = 1;
+
+  bootstrap: any;
+  events: any;
+  gameweek!: EventList;
+  gameweekID!: number;
 
   constructor(private _fplService: FplService,
     formBuilder: FormBuilder) {
@@ -38,6 +44,21 @@ export class FplComponent implements OnInit {
       this.standingsErrors = error;
       console.log("STANDINGSERROR", this.standingsErrors);
     },);
+
+
+    (await this._fplService.getFplBootstrap())
+    .subscribe(response => {
+      this.bootstrap = response;
+      console.log("BOOTSTRAP", response);
+      this.events = this.bootstrap.events;
+      console.log("EVENTS", this.events);
+
+      this.gameweek = this.events.filter((a: { [x: string]: boolean; }) => a['is_current'] === true);
+      console.log("CURRENTGAMEWEEK", this.gameweek);
+      this.gameweekID = this.gameweek[0].id;
+      console.log("CURRENTGAMEWEEKID", this.gameweekID);
+      sessionStorage.setItem('GameWeekID', JSON.stringify(this.gameweekID));
+    });
 
   }
 
