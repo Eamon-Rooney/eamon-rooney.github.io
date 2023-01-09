@@ -1,4 +1,11 @@
 <h1>FPL</h1>
+
+<p class="error" *ngIf="standingsErrors?.status === 403">For temp access accept to proxied data
+  <a href="https://cors-anywhere.herokuapp.com">
+    {{ corsAnywhereURL }}
+  </a>
+</p>
+
 <form [formGroup]="leagueForm" *ngIf="this.leagueForm">
   <label>Switch League: </label>
   <input [(ngModel)]="league?.league.id"

@@ -11,6 +11,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FplComponent implements OnInit {
 
   leagueForm!: FormGroup;
+  standingsErrors: any;
+  corsAnywhereURL: string = "https://cors-anywhere.herokuapp.com";
+  league: any;
+  standings: standingsResults[] | any;
+  p: number = 1;
 
   constructor(private _fplService: FplService,
     formBuilder: FormBuilder) {
@@ -19,9 +24,7 @@ export class FplComponent implements OnInit {
       });
   }
 
-  league: any;
-  standings: standingsResults[] | any;
-  p: number = 1;
+
 
   async ngOnInit() {
 
@@ -31,7 +34,10 @@ export class FplComponent implements OnInit {
       console.log("LEAGUE", this.league);
       this.standings = this.league.standings.results;
       console.log("STANDINGS", this.standings);
-    });
+    }, error => {
+      this.standingsErrors = error;
+      console.log("STANDINGSERROR", this.standingsErrors);
+    },);
 
   }
 
