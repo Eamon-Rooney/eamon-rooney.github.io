@@ -28,15 +28,7 @@ export class TeamComponent implements OnInit {
     (await this._fplService.getFplBootstrap())
     .subscribe(response => {
       this.bootstrap = response;
-      console.log("BOOTSTRAP", response);
       this.events = this.bootstrap.events;
-      console.log("EVENTS", this.events);
-
-      this.gameweek = this.events.filter((a: { [x: string]: boolean; }) => a['is_current'] === true);
-      console.log("CURRENTGAMEWEEK", this.gameweek);
-      this.gameweekID = this.gameweek[0].id;
-      console.log("CURRENTGAMEWEEKID", this.gameweekID);
-      sessionStorage.setItem('GameWeekID', JSON.stringify(this.gameweekID));
     });
 
     let entry = this.router.routerState.snapshot.root.children[0].url[1].path;
@@ -45,10 +37,9 @@ export class TeamComponent implements OnInit {
     this.gameweekID = sessionGameWeekID !== null ? JSON.parse(sessionGameWeekID) : '';
 
     (await this._teamService.getTeamPicks(+entry, this.gameweekID))
-    .subscribe(response => {
-      this.team = response;
-      console.log("TEAMPICKS", this.team);
-    });
+    .subscribe(response =>
+      this.team = response
+    );
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
@@ -60,9 +51,8 @@ export class TeamComponent implements OnInit {
     let entry = this.router.routerState.snapshot.root.children[0].url[1].path;
 
     (await this._teamService.getTeamPicks(+entry, this.gameweekID))
-    .subscribe(response => {
-      this.team = response;
-      console.log("UPDATEGAMEWEEK", this.team);
-    });
+    .subscribe(response =>
+      this.team = response
+    );
   }
 }

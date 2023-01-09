@@ -37,26 +37,19 @@ export class FplComponent implements OnInit {
     (await this._fplService.getFplLeague())
     .subscribe(response => {
       this.league = response;
-      console.log("LEAGUE", this.league);
       this.standings = this.league.standings.results;
-      console.log("STANDINGS", this.standings);
     }, error => {
       this.standingsErrors = error;
-      console.log("STANDINGSERROR", this.standingsErrors);
     },);
 
 
     (await this._fplService.getFplBootstrap())
     .subscribe(response => {
       this.bootstrap = response;
-      console.log("BOOTSTRAP", response);
       this.events = this.bootstrap.events;
-      console.log("EVENTS", this.events);
 
       this.gameweek = this.events.filter((a: { [x: string]: boolean; }) => a['is_current'] === true);
-      console.log("CURRENTGAMEWEEK", this.gameweek);
       this.gameweekID = this.gameweek[0].id;
-      console.log("CURRENTGAMEWEEKID", this.gameweekID);
       sessionStorage.setItem('GameWeekID', JSON.stringify(this.gameweekID));
     });
 
@@ -67,9 +60,7 @@ export class FplComponent implements OnInit {
     (await this._fplService.updateFplLeague(this.league.league.id))
     .subscribe(response => {
       this.league = response;
-      console.log("UPDATELEAGUE", this.league);
       this.standings = this.league.standings.results;
-      console.log("UPDATESTANDINGS", this.standings);
     });
 
   }
