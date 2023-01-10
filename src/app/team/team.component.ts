@@ -19,6 +19,7 @@ export class TeamComponent implements OnInit {
   bootstrap: any;
   team: any;
   events: any;
+  players: any;
   gameweek!: EventList;
   gameweekID!: number;
   eventID!: number;
@@ -28,10 +29,12 @@ export class TeamComponent implements OnInit {
     (await this._fplService.getFplBootstrap())
     .subscribe(response => {
       this.bootstrap = response;
-      this.events = this.bootstrap.events
+      console.log(this.bootstrap);
 
-      // this.gameweek = this.events.filter((a: { [x: string]: boolean; }) => a['is_current'] === true);
+      this.events = this.bootstrap.events;
       this.events = this.events.filter((a: { id: number; }) => a.id <= this.gameweekID);
+
+      this.players = this.bootstrap.elements;
     });
 
     let entry = this.router.routerState.snapshot.root.children[0].url[1].path;

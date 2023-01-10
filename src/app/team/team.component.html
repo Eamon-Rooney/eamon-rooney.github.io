@@ -7,9 +7,19 @@
 <Label> Current Gameweek: {{ gameweekID}}</Label>
 
 <ul>
-  <li *ngFor="let pick of team?.picks; let i = index">
-    <app-card>
-      <p> {{ pick?.element }}</p>
-    </app-card>
-  </li>
+  <ng-container *ngFor="let player of players; let i = index">
+    <ng-container *ngFor="let pick of team?.picks; let i = index">
+      <li *ngIf="pick?.element == player?.id">
+        <app-card>
+          <p> {{ player.web_name }}</p>
+        </app-card>
+      </li>
+    </ng-container>
+  </ng-container>
 </ul>
+
+<!-- <ng-container *ngFor="let p of people ">
+  <ng-container *ngFor="let c of color | keyvalue">
+    <li *ngIf="p.id == c.key">{{p.name}} - {{c.value}}</li>
+  </ng-container>
+</ng-container> -->
