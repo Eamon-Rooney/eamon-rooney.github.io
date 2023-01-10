@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FplService } from '../fpl/fpl.service';
 import { TeamService } from './team.service';
-import { EventList } from 'app/interfaces/events';
+import { EventList, Event } from 'app/interfaces/events';
 
 @Component({
   selector: 'app-team',
@@ -10,7 +10,6 @@ import { EventList } from 'app/interfaces/events';
   styleUrls: ['./team.component.scss']
 })
 export class TeamComponent implements OnInit {
-
 
   constructor(
     private _teamService: TeamService,
@@ -22,19 +21,24 @@ export class TeamComponent implements OnInit {
   events: any;
   gameweek!: EventList;
   gameweekID!: number;
+  eventID!: number;
 
   async ngOnInit() {
 
     (await this._fplService.getFplBootstrap())
     .subscribe(response => {
       this.bootstrap = response;
-      this.events = this.bootstrap.events;
+      this.events = this.bootstrap.events
+
+      // this.gameweek = this.events.filter((a: { [x: string]: boolean; }) => a['is_current'] === true);
+      this.events = this.events.filter((a: { id: number; }) => a.id <= this.gameweekID);
     });
 
     let entry = this.router.routerState.snapshot.root.children[0].url[1].path;
 
     const sessionGameWeekID = sessionStorage.getItem('GameWeekID');
     this.gameweekID = sessionGameWeekID !== null ? JSON.parse(sessionGameWeekID) : '';
+    this.eventID = this.gameweekID;
 
     (await this._teamService.getTeamPicks(+entry, this.gameweekID))
     .subscribe(response =>
@@ -50,7 +54,7 @@ export class TeamComponent implements OnInit {
 
     let entry = this.router.routerState.snapshot.root.children[0].url[1].path;
 
-    (await this._teamService.getTeamPicks(+entry, this.gameweekID))
+    (await this._teamService.getTeamPicks(+entry, this.eventID))
     .subscribe(response =>
       this.team = response
     );

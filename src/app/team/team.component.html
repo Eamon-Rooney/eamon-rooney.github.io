@@ -1,9 +1,10 @@
 <h2>Players</h2>
 
-<Label>Gameweek: </Label>
-<select [(ngModel)]="gameweekID" (ngModelChange)="updateGameweek()">
-  <option *ngFor="let event of events; let i = index"> {{ event.id }} </option>
+<Label>Switch Gameweek: </Label>
+<select [(ngModel)]="eventID" (ngModelChange)="updateGameweek()">
+  <option *ngFor="let event of events; let i = index" [ngValue]="event.id"> {{ event.id }} </option>
 </select>
+<Label> Current Gameweek: {{ gameweekID}}</Label>
 
 <ul>
   <li *ngFor="let pick of team?.picks; let i = index">
