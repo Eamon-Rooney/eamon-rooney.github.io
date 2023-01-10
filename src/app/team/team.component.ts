@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FplService } from '../fpl/fpl.service';
 import { TeamService } from './team.service';
-import { EventList, Event } from 'app/interfaces/events';
+import { EventList, Event, Bootstrap } from 'app/interfaces/bootstrap';
+import { Team } from 'app/interfaces/entry';
 
 @Component({
   selector: 'app-team',
@@ -16,9 +17,9 @@ export class TeamComponent implements OnInit {
     private router: Router,
     private _fplService: FplService) {}
 
-  bootstrap: any;
-  team: any;
-  events: any;
+  bootstrap!: Bootstrap | any;
+  events!: Event | any;
+  team: Team | any;
   players: any;
   gameweek!: EventList;
   gameweekID!: number;

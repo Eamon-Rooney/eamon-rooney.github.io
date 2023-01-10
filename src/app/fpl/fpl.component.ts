@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FplService } from './fpl.service';
-import { standingsResults } from 'app/interfaces/standings-results';
+import { LeagueStandings, Result } from 'app/interfaces/standings';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EventList } from 'app/interfaces/events';
+import { Bootstrap, Event, EventList } from 'app/interfaces/bootstrap';
 
 @Component({
   selector: 'app-fpl',
@@ -14,12 +14,12 @@ export class FplComponent implements OnInit {
   leagueForm!: FormGroup;
   standingsErrors: any;
   corsAnywhereURL: string = "https://cors-anywhere.herokuapp.com";
-  league: any;
-  standings: standingsResults[] | any;
+  league!: LeagueStandings | any;
+  standings: Result[] | any;
   p: number = 1;
 
-  bootstrap: any;
-  events: any;
+  bootstrap!: Bootstrap | any;
+  events!: Event | any;
   gameweek!: EventList;
   gameweekID!: number;
 
@@ -60,7 +60,7 @@ export class FplComponent implements OnInit {
     (await this._fplService.updateFplLeague(this.league.league.id))
     .subscribe(response => {
       this.league = response;
-      this.standings = this.league.standings.results;
+      this.standings = this.league?.standings?.results;
     });
 
   }
