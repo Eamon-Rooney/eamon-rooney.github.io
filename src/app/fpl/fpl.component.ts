@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FplService } from './fpl.service';
 import { LeagueStandings, Result } from 'app/interfaces/standings';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Bootstrap, Event, EventList } from 'app/interfaces/bootstrap';
+import { Bootstrap, Event, EventList, Teams } from 'app/interfaces/bootstrap';
 import { FixturesList } from 'app/interfaces/fixtures';
 
 @Component({
@@ -15,23 +15,25 @@ export class FplComponent implements OnInit {
   leagueForm!: FormGroup;
   standingsErrors: any;
   corsAnywhereURL: string = "https://cors-anywhere.herokuapp.com";
-  league!: LeagueStandings | any;
-  standings: Result[] | any;
+  league!: LeagueStandings;
+  standings!: Result[];
   p: number = 1;
 
-  bootstrap!: Bootstrap | any;
+  bootstrap!: Bootstrap;
   events!: Event | any;
+  teams!: Teams | any;
   gameweek!: EventList;
   gameweekID!: number;
 
   toogleDGWs: string = "Show";
   fixtureDGW!: number;
   fixtures!: FixturesList;
+  hasMultiple: any;
 
   constructor(private _fplService: FplService,
     formBuilder: FormBuilder) {
       this.leagueForm = formBuilder.group({
-        'league?.league.id': [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]*$/)])],
+        leagueID: [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]*$/)])],
       });
   }
 
@@ -50,6 +52,8 @@ export class FplComponent implements OnInit {
     .subscribe(response => {
       this.bootstrap = response;
       this.events = this.bootstrap.events;
+      this.teams = this.bootstrap.teams;
+      console.log("TEAMS", this.teams);
 
       this.gameweek = this.events.filter((a: { [x: string]: boolean; }) => a['is_current'] === true);
       this.gameweekID = this.gameweek[0].id;
@@ -69,13 +73,15 @@ export class FplComponent implements OnInit {
   }
 
   async toggleDoubleGws() {
+
     this.fixtureDGW = 20;
-    this.toogleDGWs = this.toogleDGWs == "Show" ? "Hide" : "Show";
+    this.toogleDGWs = this.toogleDGWs === "Show" ? "Hide" : "Show";
 
     (await this._fplService.getFixtures(this.fixtureDGW))
-    .subscribe((response) =>
-      this.fixtures = response
-    );
+    .subscribe((response) => {
+      this.fixtures = response;
+      console.log("FIXTURES", this.fixtures);
+    });
   }
 
 }

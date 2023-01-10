@@ -1,36 +1,59 @@
 <section>
   <h1>FPL</h1>
 
-  <p class="error" *ngIf="standingsErrors?.status === 403">For temp access accept to proxied data
-    <a href="https://cors-anywhere.herokuapp.com">
-      {{ corsAnywhereURL }}
-    </a>
-  </p>
+  <section>
+    <p class="error" *ngIf="standingsErrors?.status === 403">
+      For temp access accept to proxied data
+      <a href="https://cors-anywhere.herokuapp.com">
+        {{ corsAnywhereURL }}
+      </a>
+    </p>
+
+    <p class="error" *ngIf="standingsErrors?.status === 429">
+      You are making too making requests
+    </p>
+  </section>
+
+  <section>
+    <button [(ngModel)]="toogleDGWs" class="button button-primary" (click)="toggleDoubleGws()"> {{ toogleDGWs }} double game weeks</button>
+   </section>
+
+   <section>
+    <ng-container *ngIf="toogleDGWs == 'Hide'">
+      <ul>
+        <ng-container *ngFor="let team of teams">
+          <ng-container *ngFor="let fixture of fixtures">
+            <li *ngIf="fixture?.team_h === team?.id">
+              <app-card>
+                <p>{{ team?.name }}</p>
+              </app-card>
+            </li>
+            <li *ngIf="fixture?.team_a === team?.id">
+              <app-card>
+                <p>{{ team?.name }}</p>
+              </app-card>
+            </li>
+          </ng-container>
+        </ng-container>
+      </ul>
+    </ng-container>
+  </section>
+
 </section>
 
 <section>
   <form [formGroup]="leagueForm" *ngIf="this.leagueForm">
     <label>Switch League: </label>
-    <input [(ngModel)]="league?.league.id"
+    <input [(ngModel)]="league.league.id"
     (ngModelChange)="updateLeague()"
     class="form-control"
-    formControlName="league?.league.id"/>
-    <p class="error" *ngIf="leagueForm.controls['league?.league.id'].hasError('pattern') && (leagueForm.controls['league?.league.id'].dirty || leagueForm.controls['league?.league.id'].touched)">Use only numbers in League ID search</p>
+    formControlName="leagueID"/>
+    <p class="error" *ngIf="leagueForm.controls['leagueID'].hasError('pattern') && (leagueForm.controls['leagueID'].dirty || leagueForm.controls['leagueID'].touched)">Use only numbers in League ID search</p>
   </form>
 </section>
 
 <section>
-  <h2>League Name: {{ league?.league.name }}</h2>
-
-  <section>
-    <button class="button button-primary" (click)="toggleDoubleGws()"> {{ toogleDGWs }} double game weeks</button>
-    <ul>
-      <li *ngFor="let fixture of fixtures">
-        <p>{{ fixture.team_a }} - {{ fixture.team_h }}</p>
-      </li>
-    </ul>
-  </section>
-
+  <h2>League Name: {{ league.league.name }}</h2>
 
   <ul>
     <li *ngFor="let user of standings | paginate: { itemsPerPage: 5, currentPage: p }">

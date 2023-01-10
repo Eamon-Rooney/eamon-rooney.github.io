@@ -2,7 +2,7 @@ export interface Bootstrap {
   events: Event[]
   game_settings: GameSettings
   phases: Phase[]
-  teams: Team[]
+  teams: Teams[]
   total_players: number
   elements: Element[]
   element_stats: ElementStat[]
@@ -85,7 +85,7 @@ export interface Phase {
   stop_event: number
 }
 
-export interface Team {
+export interface Teams {
   code: number
   draw: number
   form: any
