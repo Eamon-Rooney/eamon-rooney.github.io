@@ -30,7 +30,6 @@ export class TeamComponent implements OnInit {
     (await this._fplService.getFplBootstrap())
     .subscribe(response => {
       this.bootstrap = response;
-      console.log(this.bootstrap);
 
       this.events = this.bootstrap.events;
       this.events = this.events.filter((a: { id: number; }) => a.id <= this.gameweekID);
