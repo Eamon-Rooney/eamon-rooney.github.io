@@ -3,6 +3,7 @@ import { FplService } from './fpl.service';
 import { LeagueStandings, Result } from 'app/interfaces/standings';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Bootstrap, Event, EventList } from 'app/interfaces/bootstrap';
+import { FixturesList } from 'app/interfaces/fixtures';
 
 @Component({
   selector: 'app-fpl',
@@ -23,14 +24,16 @@ export class FplComponent implements OnInit {
   gameweek!: EventList;
   gameweekID!: number;
 
+  toogleDGWs: string = "Show";
+  fixtureDGW!: number;
+  fixtures!: FixturesList;
+
   constructor(private _fplService: FplService,
     formBuilder: FormBuilder) {
       this.leagueForm = formBuilder.group({
         'league?.league.id': [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]*$/)])],
       });
   }
-
-
 
   async ngOnInit() {
 
@@ -64,5 +67,16 @@ export class FplComponent implements OnInit {
     });
 
   }
+
+  async toggleDoubleGws() {
+    this.fixtureDGW = 20;
+    this.toogleDGWs = this.toogleDGWs == "Show" ? "Hide" : "Show";
+
+    (await this._fplService.getFixtures(this.fixtureDGW))
+    .subscribe((response) =>
+      this.fixtures = response
+    );
+  }
+
 }
 
