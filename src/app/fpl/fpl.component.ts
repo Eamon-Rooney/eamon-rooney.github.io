@@ -32,6 +32,7 @@ export class FplComponent implements OnInit {
   fixturesUniqueGWFilter!: any;
   fixturesUniqueGWFilterIDs!: Set<number>;
   fixturesDGWFilter!: any;
+  doubleGameweekEventID!: Event | any;
 
   constructor(private _fplService: FplService,
     formBuilder: FormBuilder) {
@@ -79,6 +80,9 @@ export class FplComponent implements OnInit {
 
     this.fixtureDGW = this.gameweekID + 1;
     this.toogleDGWs = this.toogleDGWs === "Show" ? "Hide" : "Show";
+    this.doubleGameweekEventID = this.events.filter((a: { id: number; }) => a.id > this.gameweekID);
+
+    console.log("DOUBLEGAMEWEEKID", this.doubleGameweekEventID);
 
     (await this._fplService.getFixtures(this.fixtureDGW))
     .subscribe((response) => {
@@ -97,6 +101,26 @@ export class FplComponent implements OnInit {
       console.log("FIXTURESDUPLICATEGWFILTER", this.fixturesDGWFilter);
     });
 
+  }
+
+  async updateDoubleGameweek() {
+
+    (await this._fplService.getFixtures(this.fixtureDGW))
+    .subscribe((response) => {
+      this.fixtures = response;
+      console.log("UPDATEDFIXTURES", this.fixtures);
+
+      this.fixturesUniqueGWFilter = this.fixtures.filter((set => f =>
+        (!set.has(f.team_h) && !set.has(f.team_a)) && set.add(f.team_h || f.team_a))
+        (new Set));
+      console.log("UPDATEDFIXTURESUNIQUEGWFILTER", this.fixturesUniqueGWFilter);
+
+      this.fixturesUniqueGWFilterIDs = new Set(this.fixturesUniqueGWFilter.map((FUIDs: { id: number; }) => FUIDs.id));
+      console.log("UPDATEDFIXTURESUNIQUEGWFILTERIDS", this.fixturesUniqueGWFilterIDs);
+
+      this.fixturesDGWFilter = this.fixtures.filter((FDIDs: { id: number; }) => !this.fixturesUniqueGWFilterIDs.has(FDIDs.id));
+      console.log("UPDATEDFIXTURESDUPLICATEGWFILTER", this.fixturesDGWFilter);
+    });
   }
 
 }

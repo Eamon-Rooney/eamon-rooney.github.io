@@ -22,23 +22,29 @@
   <button [(ngModel)]="toogleDGWs" class="button button-primary" (click)="toggleDoubleGws()"> {{ toogleDGWs }} double game weeks</button>
 
   <ng-container *ngIf="toogleDGWs == 'Hide'">
-    <ul>
-      <ng-container *ngFor="let team of teams">
-        <ng-container *ngFor="let fixture of fixturesDGWFilter">
-          <li *ngIf="fixture?.team_h === team?.id">
-            <app-card>
-              <p>{{ team?.name }}</p>
-            </app-card>
-          </li>
-          <li *ngIf="fixture?.team_a === team?.id">
-            <app-card>
-              <p>{{ team?.name }}</p>
-            </app-card>
-          </li>
+    <Label>Switch Gameweek: </Label>
+    <select [(ngModel)]="fixtureDGW" (ngModelChange)="updateDoubleGameweek()">
+      <option *ngFor="let DGWEvent of doubleGameweekEventID; let i = index" [ngValue]="DGWEvent.id"> {{ DGWEvent.id }} </option>
+    </select>
+    <Label> Current Gameweek: {{ gameweekID }}</Label>
+
+      <ul>
+        <ng-container *ngFor="let team of teams">
+          <ng-container *ngFor="let fixture of fixturesDGWFilter">
+            <li *ngIf="fixture?.team_h === team?.id">
+              <app-card>
+                <p>{{ team?.name }}</p>
+              </app-card>
+            </li>
+            <li *ngIf="fixture?.team_a === team?.id">
+              <app-card>
+                <p>{{ team?.name }}</p>
+              </app-card>
+            </li>
+          </ng-container>
         </ng-container>
-      </ng-container>
-    </ul>
-  </ng-container>
+      </ul>
+    </ng-container>
 </aside>
 
 <section>
