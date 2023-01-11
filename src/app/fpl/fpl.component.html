@@ -1,45 +1,45 @@
-<section>
+<header>
   <h1>FPL</h1>
+</header>
 
+<section>
   <section>
     <p class="error" *ngIf="standingsErrors?.status === 403">
-      For temp access accept to proxied data
+      Using
       <a href="https://cors-anywhere.herokuapp.com">
-        {{ corsAnywhereURL }}
+        CORS ANYWHERE
       </a>
+      proxy that requires requesting temp access daily
     </p>
 
     <p class="error" *ngIf="standingsErrors?.status === 429">
       You are making too making requests
     </p>
   </section>
-
-  <section>
-    <button [(ngModel)]="toogleDGWs" class="button button-primary" (click)="toggleDoubleGws()"> {{ toogleDGWs }} double game weeks</button>
-   </section>
-
-   <section>
-    <ng-container *ngIf="toogleDGWs == 'Hide'">
-      <ul>
-        <ng-container *ngFor="let team of teams">
-          <ng-container *ngFor="let fixture of fixtures">
-            <li *ngIf="fixture?.team_h === team?.id">
-              <app-card>
-                <p>{{ team?.name }}</p>
-              </app-card>
-            </li>
-            <li *ngIf="fixture?.team_a === team?.id">
-              <app-card>
-                <p>{{ team?.name }}</p>
-              </app-card>
-            </li>
-          </ng-container>
-        </ng-container>
-      </ul>
-    </ng-container>
-  </section>
-
 </section>
+
+<aside>
+  <button [(ngModel)]="toogleDGWs" class="button button-primary" (click)="toggleDoubleGws()"> {{ toogleDGWs }} double game weeks</button>
+
+  <ng-container *ngIf="toogleDGWs == 'Hide'">
+    <ul>
+      <ng-container *ngFor="let team of teams">
+        <ng-container *ngFor="let fixture of fixturesDGWFilter">
+          <li *ngIf="fixture?.team_h === team?.id">
+            <app-card>
+              <p>{{ team?.name }}</p>
+            </app-card>
+          </li>
+          <li *ngIf="fixture?.team_a === team?.id">
+            <app-card>
+              <p>{{ team?.name }}</p>
+            </app-card>
+          </li>
+        </ng-container>
+      </ng-container>
+    </ul>
+  </ng-container>
+</aside>
 
 <section>
   <form [formGroup]="leagueForm" *ngIf="this.leagueForm">

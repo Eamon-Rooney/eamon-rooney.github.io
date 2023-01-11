@@ -3,7 +3,7 @@ import { FplService } from './fpl.service';
 import { LeagueStandings, Result } from 'app/interfaces/standings';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Bootstrap, Event, EventList, Teams } from 'app/interfaces/bootstrap';
-import { FixturesList } from 'app/interfaces/fixtures';
+import { Fixtures, FixturesList } from 'app/interfaces/fixtures';
 
 @Component({
   selector: 'app-fpl',
@@ -29,6 +29,9 @@ export class FplComponent implements OnInit {
   fixtureDGW!: number;
   fixtures!: FixturesList;
   hasMultiple: any;
+  fixturesUniqueGWFilter!: any;
+  fixturesUniqueGWFilterIDs!: Set<number>;
+  fixturesDGWFilter!: any;
 
   constructor(private _fplService: FplService,
     formBuilder: FormBuilder) {
@@ -74,14 +77,26 @@ export class FplComponent implements OnInit {
 
   async toggleDoubleGws() {
 
-    this.fixtureDGW = 20;
+    this.fixtureDGW = this.gameweekID + 1;
     this.toogleDGWs = this.toogleDGWs === "Show" ? "Hide" : "Show";
 
     (await this._fplService.getFixtures(this.fixtureDGW))
     .subscribe((response) => {
       this.fixtures = response;
       console.log("FIXTURES", this.fixtures);
+
+      this.fixturesUniqueGWFilter = this.fixtures.filter((set => f =>
+        (!set.has(f.team_a) && !set.has(f.team_h)) && set.add(f.team_a || f.team_h))
+        (new Set));
+      console.log("FIXTURESUNIQUEGWFILTER", this.fixturesUniqueGWFilter);
+
+      this.fixturesUniqueGWFilterIDs = new Set(this.fixturesUniqueGWFilter.map((FUIDs: { id: number; }) => FUIDs.id));
+      console.log("FIXTURESUNIQUEGWFILTERIDS", this.fixturesUniqueGWFilterIDs);
+
+      this.fixturesDGWFilter = this.fixtures.filter((FDIDs: { id: number; }) => !this.fixturesUniqueGWFilterIDs.has(FDIDs.id));
+      console.log("FIXTURESDUPLICATEGWFILTER", this.fixturesDGWFilter);
     });
+
   }
 
 }
