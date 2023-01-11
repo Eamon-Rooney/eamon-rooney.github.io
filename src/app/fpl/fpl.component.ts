@@ -57,7 +57,6 @@ export class FplComponent implements OnInit {
       this.bootstrap = response;
       this.events = this.bootstrap.events;
       this.teams = this.bootstrap.teams;
-      console.log("TEAMS", this.teams);
 
       this.gameweek = this.events.filter((a: { [x: string]: boolean; }) => a['is_current'] === true);
       this.gameweekID = this.gameweek[0].id;
@@ -82,16 +81,7 @@ export class FplComponent implements OnInit {
     this.toogleDGWs = this.toogleDGWs === "Show" ? "Hide" : "Show";
     this.doubleGameweekEventID = this.events.filter((a: { id: number; }) => a.id > this.gameweekID);
 
-    (await this._fplService.getFixtures(this.fixtureDGW))
-    .subscribe((response) => {
-      this.fixtures = response;
-
-      this.fixturesUniqueGWFilter = this.fixtures.filter((set => f =>
-        (!set.has(f.team_a) && !set.has(f.team_h)) && set.add(f.team_a || f.team_h))
-        (new Set));
-      this.fixturesUniqueGWFilterIDs = new Set(this.fixturesUniqueGWFilter.map((FUIDs: { id: number; }) => FUIDs.id));
-      this.fixturesDGWFilter = this.fixtures.filter((FDIDs: { id: number; }) => !this.fixturesUniqueGWFilterIDs.has(FDIDs.id));
-    });
+    this.updateDoubleGameweek();
 
   }
 
