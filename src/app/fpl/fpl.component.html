@@ -22,6 +22,7 @@
   <button [(ngModel)]="toogleDGWs" class="button button-primary" (click)="toggleDoubleGws()"> {{ toogleDGWs }} double game weeks</button>
 
   <ng-container *ngIf="toogleDGWs == 'Hide'">
+    <h2>Double Gameweek: {{ fixtureDGW - gameweekID }} game weeks time</h2>
     <Label>Switch Gameweek: </Label>
     <select [(ngModel)]="fixtureDGW" (ngModelChange)="updateDoubleGameweek()">
       <option *ngFor="let DGWEvent of doubleGameweekEventID; let i = index" [ngValue]="DGWEvent.id"> {{ DGWEvent.id }} </option>

@@ -82,23 +82,15 @@ export class FplComponent implements OnInit {
     this.toogleDGWs = this.toogleDGWs === "Show" ? "Hide" : "Show";
     this.doubleGameweekEventID = this.events.filter((a: { id: number; }) => a.id > this.gameweekID);
 
-    console.log("DOUBLEGAMEWEEKID", this.doubleGameweekEventID);
-
     (await this._fplService.getFixtures(this.fixtureDGW))
     .subscribe((response) => {
       this.fixtures = response;
-      console.log("FIXTURES", this.fixtures);
 
       this.fixturesUniqueGWFilter = this.fixtures.filter((set => f =>
         (!set.has(f.team_a) && !set.has(f.team_h)) && set.add(f.team_a || f.team_h))
         (new Set));
-      console.log("FIXTURESUNIQUEGWFILTER", this.fixturesUniqueGWFilter);
-
       this.fixturesUniqueGWFilterIDs = new Set(this.fixturesUniqueGWFilter.map((FUIDs: { id: number; }) => FUIDs.id));
-      console.log("FIXTURESUNIQUEGWFILTERIDS", this.fixturesUniqueGWFilterIDs);
-
       this.fixturesDGWFilter = this.fixtures.filter((FDIDs: { id: number; }) => !this.fixturesUniqueGWFilterIDs.has(FDIDs.id));
-      console.log("FIXTURESDUPLICATEGWFILTER", this.fixturesDGWFilter);
     });
 
   }
@@ -108,18 +100,12 @@ export class FplComponent implements OnInit {
     (await this._fplService.getFixtures(this.fixtureDGW))
     .subscribe((response) => {
       this.fixtures = response;
-      console.log("UPDATEDFIXTURES", this.fixtures);
 
       this.fixturesUniqueGWFilter = this.fixtures.filter((set => f =>
         (!set.has(f.team_h) && !set.has(f.team_a)) && set.add(f.team_h || f.team_a))
         (new Set));
-      console.log("UPDATEDFIXTURESUNIQUEGWFILTER", this.fixturesUniqueGWFilter);
-
       this.fixturesUniqueGWFilterIDs = new Set(this.fixturesUniqueGWFilter.map((FUIDs: { id: number; }) => FUIDs.id));
-      console.log("UPDATEDFIXTURESUNIQUEGWFILTERIDS", this.fixturesUniqueGWFilterIDs);
-
       this.fixturesDGWFilter = this.fixtures.filter((FDIDs: { id: number; }) => !this.fixturesUniqueGWFilterIDs.has(FDIDs.id));
-      console.log("UPDATEDFIXTURESDUPLICATEGWFILTER", this.fixturesDGWFilter);
     });
   }
 
