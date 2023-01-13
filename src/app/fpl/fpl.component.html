@@ -31,13 +31,8 @@
 
       <ul>
         <ng-container *ngFor="let team of teams">
-          <ng-container *ngFor="let fixture of fixturesDGWFilter">
-            <li *ngIf="fixture?.team_h === team?.id">
-              <app-card>
-                <p>{{ team?.name }}</p>
-              </app-card>
-            </li>
-            <li *ngIf="fixture?.team_a === team?.id">
+          <ng-container *ngFor="let fixture of doubleGWTeams">
+            <li *ngIf="fixture === team?.id">
               <app-card>
                 <p>{{ team?.name }}</p>
               </app-card>
