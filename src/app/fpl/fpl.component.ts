@@ -30,12 +30,13 @@ export class FplComponent implements OnInit {
   fixtureDGW!: number;
   fixtures!: FixturesList;
   hasMultiple: any;
-  fixturesUniqueGWFilter!: any;
-  fixturesUniqueGWFilterIDs!: Set<number>;
-  fixturesDGWFilter!: any;
+  fixturesDGWTeamsFilter!: any;
+  fituresDGWMatchesFilter!: any;
   doubleGameweekEventID!: Event | any;
   doubleGWTeams!: number[];
   allTeams!: number[];
+  doubleGWTeam!: number;
+  doubleGameWeekMap!: any;
 
   constructor(private _fplService: FplService,
     formBuilder: FormBuilder) {
@@ -97,11 +98,34 @@ export class FplComponent implements OnInit {
     .subscribe((response) => {
       this.fixtures = response;
 
-      this.fixturesDGWFilter = this.fixtures.forEach((teamsFixture) => {
+      this.fixturesDGWTeamsFilter = this.fixtures.forEach((teamsFixture) => {
         this.allTeams.push(teamsFixture.team_a, teamsFixture.team_h);
-        this.doubleGWTeams = this.allTeams.filter((e: any, i: any, a: string | any[]) => a.indexOf(e) !== i)
+        this.doubleGWTeams = this.allTeams.filter((e: any, i: any, a: string | any[]) => a.indexOf(e) !== i);
       });
+
+      this.fituresDGWMatchesFilter = this.fixtures.filter(fixture =>
+          this.doubleGWTeams.includes(fixture.team_h) ||
+          this.doubleGWTeams.includes(fixture.team_a));
+
+      this.doubleGameWeekMap = this.doubleGWTeams.map((teamID: any) => {
+        const vsTeams = new Array;
+        for (let fixture of this.fituresDGWMatchesFilter) {
+
+          if (fixture.team_h === teamID) {
+            vsTeams.push(fixture.team_a);
+          }
+          if (fixture.team_a === teamID) {
+            vsTeams.push(fixture.team_h);
+          }
+        }
+        return {
+          dgwTeam: teamID,
+          vsTeams: vsTeams
+        }
+      });
+
     });
+
   }
 
   updateTeamNameStorage(teamName: string) {

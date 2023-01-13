@@ -3,11 +3,33 @@ a {
   text-decoration: none;
 }
 h1, h2, h3, h4, h5, h6 {
-  border-bottom: 2px solid #1d70b8;
-  background-color: #1d70b8;
   color: white;
   text-align: left;
   padding: 20px 0 20px 50px;
+}
+h1 {
+  border-bottom: 2px solid #1d70b8;
+  background-color: #1d70b8;
+}
+h2 {
+  border-bottom: 2px solid #b81d7d;
+  background-color: #b81d7d;
+}
+h3 {
+  border-bottom: 2px solid #b8221d;
+  background-color: #b8221d;
+}
+h4 {
+  border-bottom: 2px solid #2ab81d;
+  background-color: #2ab81d;
+}
+h5 {
+  border-bottom: 2px solid #b88a1d;
+  background-color: #b88a1d;
+}
+h6 {
+  border-bottom: 2px solid #692894;
+  background-color: #692894;
 }
 
 .ngx-pagination {
@@ -24,14 +46,14 @@ h1, h2, h3, h4, h5, h6 {
   margin: 10px;
 }
 .button-success {
-  background: rgb(28, 184, 65);
+  background: #2ab81d;
 }
 .button-error {
-  background: rgb(202, 60, 60);
+  background: #b8221d;
 }
 .button-warning {
-  background: rgb(223, 117, 20);
+  background: b88a1d;
 }
 .button-primary {
-  background: rgb(66, 184, 221);
+  background: #1d70b8;
 }

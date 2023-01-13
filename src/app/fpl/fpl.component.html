@@ -31,10 +31,17 @@
 
       <ul>
         <ng-container *ngFor="let team of teams">
-          <ng-container *ngFor="let fixture of doubleGWTeams">
-            <li *ngIf="fixture === team?.id">
+          <ng-container *ngFor="let doubleGameWeekLine of doubleGameWeekMap; let i = index">
+            <li *ngIf="doubleGameWeekLine.dgwTeam === team?.id">
               <app-card>
-                <p>{{ team?.name }}</p>
+                <h4>{{ team?.name }}</h4>
+                <ng-container *ngFor="let team of teams">
+                  <ng-container *ngFor="let vsTeam of doubleGameWeekLine.vsTeams">
+                    <ng-container *ngIf="vsTeam === team?.id">
+                      <p>vs: {{ team?.name }}</p>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
               </app-card>
             </li>
           </ng-container>
