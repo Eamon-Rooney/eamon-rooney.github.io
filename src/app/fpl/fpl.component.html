@@ -59,7 +59,7 @@
 
   <ul>
     <li *ngFor="let user of standings | paginate: { itemsPerPage: 5, currentPage: p }">
-      <a routerLink="/team/{{ user?.entry }}">
+      <a (click)="updateTeamNameStorage(user.entry_name)" routerLink="/team/{{ user?.entry }}">
         <app-card>
           <p> {{ user?.rank }} </p>
           <p> {{ user?.entry_name }} </p>
@@ -72,3 +72,5 @@
 
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </section>
+
+<router-outlet (activate)="onOutletLoaded($event)"></router-outlet>

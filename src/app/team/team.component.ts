@@ -25,6 +25,8 @@ export class TeamComponent implements OnInit {
   gameweekID!: number;
   eventID!: number;
 
+  teamName!: string;
+
   async ngOnInit() {
 
     (await this._fplService.getFplBootstrap())

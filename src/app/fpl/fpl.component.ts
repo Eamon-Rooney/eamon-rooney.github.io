@@ -4,6 +4,7 @@ import { LeagueStandings, Result } from 'app/interfaces/standings';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Bootstrap, Event, EventList, Teams } from 'app/interfaces/bootstrap';
 import { Fixtures, FixturesList } from 'app/interfaces/fixtures';
+import { TeamComponent } from 'app/team/team.component';
 
 @Component({
   selector: 'app-fpl',
@@ -95,23 +96,23 @@ export class FplComponent implements OnInit {
     (await this._fplService.getFixtures(this.fixtureDGW))
     .subscribe((response) => {
       this.fixtures = response;
-      console.log(this.fixtures);
-
-      // this.fixturesUniqueGWFilter = this.fixtures.filter((set => f =>
-      //   (!set.has(f.team_h) && !set.has(f.team_a)) && set.add(f.team_h || f.team_a))
-      //   (new Set));
-      // this.fixturesUniqueGWFilterIDs = new Set(this.fixturesUniqueGWFilter.map((FUIDs: { id: number; }) => FUIDs.id));
-      // this.fixturesDGWFilter = this.fixtures.filter((FDIDs: { id: number; }) => !this.fixturesUniqueGWFilterIDs.has(FDIDs.id));
 
       this.fixturesDGWFilter = this.fixtures.forEach((teamsFixture) => {
-        console.log("FIXTURE", teamsFixture);
         this.allTeams.push(teamsFixture.team_a, teamsFixture.team_h);
         this.doubleGWTeams = this.allTeams.filter((e: any, i: any, a: string | any[]) => a.indexOf(e) !== i)
       });
-      console.log("TEAMS", this.allTeams);
-      console.log("DOUBLEGWTEAMS", this.doubleGWTeams);
     });
   }
 
+  updateTeamNameStorage(teamName: string) {
+    sessionStorage.setItem('TeamName', JSON.stringify(teamName));
+  }
+
+  onOutletLoaded(component: TeamComponent) {
+    if (component instanceof TeamComponent) {
+      const sessionTeamName: any = sessionStorage.getItem('TeamName');
+      component.teamName = JSON.parse(sessionTeamName);
+    }
+  }
 }
 
