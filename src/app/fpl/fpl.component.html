@@ -15,10 +15,14 @@
     <p class="error" *ngIf="standingsErrors?.status === 429">
       You are making too making requests
     </p>
+
+    <p class="error" *ngIf="standingsErrors?.status === 503">
+      The game is being updated, try again later
+    </p>
   </section>
 </section>
 
-<aside>
+<section>
   <button [(ngModel)]="toogleDGWs" class="button button-primary" (click)="toggleDoubleGws()"> {{ toogleDGWs }} double game weeks</button>
 
   <ng-container *ngIf="toogleDGWs == 'Hide'">
@@ -38,7 +42,7 @@
                 <ng-container *ngFor="let team of teams">
                   <ng-container *ngFor="let vsTeam of doubleGameWeekLine.vsTeams">
                     <ng-container *ngIf="vsTeam === team?.id">
-                      <p>vs: {{ team?.name }}</p>
+                      <p>vs {{ team?.name }}</p>
                     </ng-container>
                   </ng-container>
                 </ng-container>
@@ -48,7 +52,7 @@
         </ng-container>
       </ul>
     </ng-container>
-</aside>
+  </section>
 
 <section>
   <form [formGroup]="leagueForm" *ngIf="this.leagueForm">
@@ -66,7 +70,7 @@
 
   <ul>
     <li *ngFor="let user of standings | paginate: { itemsPerPage: 5, currentPage: p }">
-      <a (click)="updateTeamNameStorage(user.entry_name)" routerLink="/team/{{ user?.entry }}">
+      <a (click)="updateTeamNameStorage(user.entry_name, user.entry)" routerLink="/team/{{ user?.entry }}">
         <app-card>
           <p> {{ user?.rank }} </p>
           <p> {{ user?.entry_name }} </p>

@@ -20,12 +20,16 @@ export class TeamComponent implements OnInit {
   bootstrap!: Bootstrap | any;
   events!: Event | any;
   team: Team | any;
+  transfers!: any;
   players: any;
   gameweek!: EventList;
   gameweekID!: number;
   eventID!: number;
 
   teamName!: string;
+  teamID!: number;
+
+  toogleTransfers: string = "Show";
 
   async ngOnInit() {
 
@@ -39,13 +43,11 @@ export class TeamComponent implements OnInit {
       this.players = this.bootstrap.elements;
     });
 
-    let entry = this.router.routerState.snapshot.root.children[0].url[1].path;
-
     const sessionGameWeekID = sessionStorage.getItem('GameWeekID');
     this.gameweekID = sessionGameWeekID !== null ? JSON.parse(sessionGameWeekID) : '';
     this.eventID = this.gameweekID;
 
-    (await this._teamService.getTeamPicks(+entry, this.gameweekID))
+    (await this._teamService.getTeamPicks(this.teamID, this.gameweekID))
     .subscribe(response =>
       this.team = response
     );
@@ -53,15 +55,24 @@ export class TeamComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     }
+
+    (await this._teamService.getTeamTransfers(this.teamID))
+    .subscribe(response =>
+      this.transfers = response
+    );
+
   }
 
   async updateGameweek() {
-
-    let entry = this.router.routerState.snapshot.root.children[0].url[1].path;
-
-    (await this._teamService.getTeamPicks(+entry, this.eventID))
+    (await this._teamService.getTeamPicks(this.teamID, this.eventID))
     .subscribe(response =>
       this.team = response
     );
   }
+
+
+  async toggleGWTransfers() {
+    this.toogleTransfers = this.toogleTransfers === "Show" ? "Hide" : "Show";
+  }
 }
+

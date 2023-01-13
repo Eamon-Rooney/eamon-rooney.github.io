@@ -3,7 +3,7 @@ import { FplService } from './fpl.service';
 import { LeagueStandings, Result } from 'app/interfaces/standings';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Bootstrap, Event, EventList, Teams } from 'app/interfaces/bootstrap';
-import { Fixtures, FixturesList } from 'app/interfaces/fixtures';
+import { FixturesList } from 'app/interfaces/fixtures';
 import { TeamComponent } from 'app/team/team.component';
 
 @Component({
@@ -128,14 +128,17 @@ export class FplComponent implements OnInit {
 
   }
 
-  updateTeamNameStorage(teamName: string) {
+  updateTeamNameStorage(teamName: string, teamID: number) {
     sessionStorage.setItem('TeamName', JSON.stringify(teamName));
+    sessionStorage.setItem('TeamID', JSON.stringify(teamID));
   }
 
   onOutletLoaded(component: TeamComponent) {
     if (component instanceof TeamComponent) {
       const sessionTeamName: any = sessionStorage.getItem('TeamName');
+      const sessionTeamID: any = sessionStorage.getItem('TeamID');
       component.teamName = JSON.parse(sessionTeamName);
+      component.teamID = JSON.parse(sessionTeamID);
     }
   }
 }

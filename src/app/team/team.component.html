@@ -1,3 +1,4 @@
+<section>
 <h2>Players: {{ teamName }}</h2>
 
 <Label>Switch Gameweek: </Label>
@@ -17,3 +18,27 @@
     </ng-container>
   </ng-container>
 </ul>
+</section>
+
+<section>
+  <button ngDefaultControl [(ngModel)]="toogleTransfers" class="button button-primary" (click)="toggleGWTransfers()"> {{ toogleTransfers }} game week transfers</button>
+
+  <ng-container *ngIf="toogleTransfers === 'Hide'">
+
+    <h2>Transfers game week: {{ eventID }} </h2>
+    <ng-container *ngFor="let transfer of transfers">
+      <ng-container *ngFor="let player of players;">
+        <ng-container *ngIf="transfer.event === eventID && transfer.element_in === player?.id">
+            <app-card style="color: green;"> In: {{ player.web_name }} </app-card>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngFor="let transfer of transfers">
+      <ng-container *ngFor="let player of players;">
+        <ng-container *ngIf="transfer.event === eventID && transfer.element_out === player?.id">
+            <app-card style="color: red;"> Out: {{ player.web_name }} </app-card>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</section>
