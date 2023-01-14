@@ -56,11 +56,6 @@ export class TeamComponent implements OnInit {
       return false;
     }
 
-    (await this._teamService.getTeamTransfers(this.teamID))
-    .subscribe(response =>
-      this.transfers = response
-    );
-
   }
 
   async updateGameweek() {
@@ -73,6 +68,11 @@ export class TeamComponent implements OnInit {
 
   async toggleGWTransfers() {
     this.toogleTransfers = this.toogleTransfers === "Show" ? "Hide" : "Show";
+
+    (await this._teamService.getTeamTransfers(this.teamID))
+    .subscribe(response =>
+      this.transfers = response
+    );
   }
 }
 
