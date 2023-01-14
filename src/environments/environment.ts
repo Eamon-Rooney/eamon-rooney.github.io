@@ -14,7 +14,7 @@ export const environment = {
   },
   team: {
     picks: (corsanywhere + 'entry/'),
-    transfers: (corsanywhere + 'entry/')
+    transfers: (corsanywhere + 'entry/'),
   }
 
 };

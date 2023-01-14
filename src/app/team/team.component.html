@@ -26,19 +26,23 @@
   <ng-container *ngIf="toogleTransfers === 'Hide'">
 
     <h2>Transfers game week: {{ eventID }} </h2>
-    <ng-container *ngFor="let transfer of transfers">
-      <ng-container *ngFor="let player of players;">
-        <ng-container *ngIf="transfer.event === eventID && transfer.element_in === player?.id">
-            <app-card style="color: green;"> In: {{ player.web_name }} </app-card>
+    <div style="display:inline-block; width: 50%;">
+      <ng-container *ngFor="let transfer of transfers">
+        <ng-container *ngFor="let player of players;">
+          <ng-container *ngIf="transfer.event === eventID && transfer.element_in === player?.id">
+              <app-card style="color: green;">{{ player.web_name }} </app-card>
+          </ng-container>
         </ng-container>
       </ng-container>
-    </ng-container>
-    <ng-container *ngFor="let transfer of transfers">
-      <ng-container *ngFor="let player of players;">
-        <ng-container *ngIf="transfer.event === eventID && transfer.element_out === player?.id">
-            <app-card style="color: red;"> Out: {{ player.web_name }} </app-card>
+      </div>
+      <div style="display:inline-block; width: 50%;">
+      <ng-container *ngFor="let transfer of transfers">
+        <ng-container *ngFor="let player of players;">
+          <ng-container *ngIf="transfer.event === eventID && transfer.element_out === player?.id">
+              <app-card style="color: red;">{{ player.web_name }} </app-card>
+          </ng-container>
         </ng-container>
       </ng-container>
-    </ng-container>
+    </div>
   </ng-container>
 </section>
