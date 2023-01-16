@@ -1,4 +1,4 @@
-ul {
+.players {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -8,14 +8,26 @@ ul {
   justify-content: space-around;
 }
 
-li {
-  list-style: none;
 
+.subs {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 0;
+  align-content: flex-start;
+  align-items: stretch;
+  justify-content: space-around;
+}
+
+.player {
   ::ng-deep {
-    width: 100%;
     min-height: 100%;
-    @media (min-width: 768px) {
-      max-width: 33%;
+    width: 14%;
+
+    @media (max-width: 768px) {
+      margin: 10px auto;
     }
   }
 }
+
+

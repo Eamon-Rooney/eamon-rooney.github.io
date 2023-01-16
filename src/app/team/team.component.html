@@ -7,17 +7,96 @@
 </select>
 <Label> Current Gameweek: {{ gameweekID}}</Label>
 
-<ul>
+
+<h6>Starting 11</h6>
+<div class="players">
   <ng-container *ngFor="let player of players; let i = index">
     <ng-container *ngFor="let pick of team?.picks; let i = index">
-      <li *ngIf="pick?.element == player?.id">
-        <app-card>
-          <p> {{ player.web_name }}</p>
-        </app-card>
-      </li>
-    </ng-container>
+    <app-card class="player" *ngIf="pick?.element == player?.id &&
+      player?.element_type === 1 &&
+      pick.position <= 11">
+      <p> {{ player.web_name }}</p>
+      <p> {{ player.event_points }}</p>
+    </app-card>
   </ng-container>
-</ul>
+  </ng-container>
+  </div>
+  <div class="players">
+  <ng-container *ngFor="let player of players; let i = index">
+    <ng-container *ngFor="let pick of team?.picks; let i = index">
+    <app-card class="player" *ngIf="pick?.element == player?.id &&
+      player?.element_type === 2 &&
+      pick.position <= 11">
+      <p> {{ player.web_name }}</p>
+      <p> {{ player.event_points }}</p>
+    </app-card>
+  </ng-container>
+  </ng-container>
+  </div>
+  <div class="players">
+  <ng-container *ngFor="let player of players; let i = index">
+    <ng-container *ngFor="let pick of team?.picks; let i = index">
+    <app-card class="player" *ngIf="pick?.element == player?.id &&
+      player?.element_type === 3 &&
+      pick.position <= 11">
+      <p> {{ player.web_name }}</p>
+      <p> {{ player.event_points }}</p>
+    </app-card>
+  </ng-container>
+  </ng-container>
+</div>
+<div class="players">
+<ng-container *ngFor="let player of players; let i = index">
+  <ng-container *ngFor="let pick of team?.picks; let i = index">
+  <app-card class="player" *ngIf="pick?.element == player?.id &&
+    player?.element_type === 4 &&
+    pick.position <= 11">
+    <p> {{ player.web_name }}</p>
+    <p> {{ player.event_points }}</p>
+  </app-card>
+</ng-container>
+</ng-container>
+</div>
+<h6>Subs</h6>
+<div class="subs">
+<ng-container *ngFor="let player of players; let i = index">
+  <ng-container *ngFor="let pick of team?.picks; let i = index">
+  <app-card class="player" *ngIf="pick?.element == player?.id &&
+    pick.position == 12">
+    <p> {{ player.web_name }}</p>
+    <p> {{ player.event_points }}</p>
+  </app-card>
+</ng-container>
+</ng-container>
+    <ng-container *ngFor="let player of players; let i = index">
+      <ng-container *ngFor="let pick of team?.picks; let i = index">
+  <app-card class="player" *ngIf="pick?.element == player?.id &&
+  pick.position == 13">
+  <p> {{ player.web_name }}</p>
+  <p> {{ player.event_points }}</p>
+</app-card>
+</ng-container>
+</ng-container>
+  <ng-container *ngFor="let player of players; let i = index">
+    <ng-container *ngFor="let pick of team?.picks; let i = index">
+<app-card class="player" *ngIf="pick?.element == player?.id &&
+pick.position == 14">
+<p> {{ player.web_name }}</p>
+<p> {{ player.event_points }}</p>
+</app-card>
+</ng-container>
+</ng-container>
+  <ng-container *ngFor="let player of players; let i = index">
+    <ng-container *ngFor="let pick of team?.picks; let i = index">
+<app-card class="player" *ngIf="pick?.element == player?.id &&
+pick.position == 15">
+<p> {{ player.web_name }}</p>
+<p> {{ player.event_points }}</p>
+</app-card>
+  </ng-container>
+</ng-container>
+</div>
+
 </section>
 
 <section>

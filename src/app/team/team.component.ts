@@ -18,7 +18,7 @@ export class TeamComponent implements OnInit {
     private router: Router,
     private _fplService: FplService) {}
 
-  bootstrap!: Bootstrap | any;
+  bootstrap!: Bootstrap;
   events!: Event | any;
   team!: PicksList;
   transfers!: TransferList;
@@ -41,7 +41,9 @@ export class TeamComponent implements OnInit {
       this.events = this.bootstrap.events;
       this.events = this.events.filter((a: { id: number; }) => a.id <= this.gameweekID);
 
+      console.log("this.bootstrap.element_types", this.bootstrap.element_types);
       this.players = this.bootstrap.elements;
+      console.log("this.bootstrap.elements", this.bootstrap.elements);
     });
 
     const sessionGameWeekID = sessionStorage.getItem('GameWeekID');
@@ -49,9 +51,10 @@ export class TeamComponent implements OnInit {
     this.eventID = this.gameweekID;
 
     (await this._teamService.getTeamPicks(this.teamID, this.gameweekID))
-    .subscribe(response =>
-      this.team = response
-    );
+    .subscribe(response => {
+      this.team = response,
+      console.log("this.team", this.team);
+    });
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
