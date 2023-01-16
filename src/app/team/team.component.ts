@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { FplService } from '../fpl/fpl.service';
 import { TeamService } from './team.service';
 import { EventList, Event, Bootstrap } from 'app/interfaces/bootstrap';
-import { Team } from 'app/interfaces/entry';
+import { PicksList } from 'app/interfaces/picks';
+import { TransferList } from 'app/interfaces/transfers';
 
 @Component({
   selector: 'app-team',
@@ -19,9 +20,9 @@ export class TeamComponent implements OnInit {
 
   bootstrap!: Bootstrap | any;
   events!: Event | any;
-  team: Team | any;
-  transfers!: any;
-  players: any;
+  team!: PicksList;
+  transfers!: TransferList;
+  players!: Element | any;
   gameweek!: EventList;
   gameweekID!: number;
   eventID!: number;
