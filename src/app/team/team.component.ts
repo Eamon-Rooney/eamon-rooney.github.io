@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FplService } from '../fpl/fpl.service';
 import { TeamService } from './team.service';
-import { EventList, Event, Bootstrap } from 'app/interfaces/bootstrap';
+import { EventList, Event, Bootstrap, ElementType } from 'app/interfaces/bootstrap';
 import { PicksList } from 'app/interfaces/picks';
 import { TransferList } from 'app/interfaces/transfers';
 
@@ -23,6 +23,7 @@ export class TeamComponent implements OnInit {
   team!: PicksList;
   transfers!: TransferList;
   players!: Element | any;
+  positions! : ElementType | any;
   gameweek!: EventList;
   gameweekID!: number;
   eventID!: number;
@@ -41,9 +42,9 @@ export class TeamComponent implements OnInit {
       this.events = this.bootstrap.events;
       this.events = this.events.filter((a: { id: number; }) => a.id <= this.gameweekID);
 
-      console.log("this.bootstrap.element_types", this.bootstrap.element_types);
       this.players = this.bootstrap.elements;
-      console.log("this.bootstrap.elements", this.bootstrap.elements);
+
+      this.positions = this.bootstrap.element_types;
     });
 
     const sessionGameWeekID = sessionStorage.getItem('GameWeekID');
