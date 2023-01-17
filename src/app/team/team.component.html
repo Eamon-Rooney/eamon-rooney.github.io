@@ -15,9 +15,11 @@
     <app-card class="player" *ngIf="pick?.element == player?.id &&
       player?.element_type === 1 &&
       pick.position <= 11">
+      <p class="captains"> {{ pick.is_captain ? "C" : '' }}</p>
+      <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
       <p> {{ positions[player?.element_type - 1].singular_name_short }}</p>
       <p> {{ player.web_name }}</p>
-      <p> {{ player.event_points }}</p>
+      <p> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
     </app-card>
   </ng-container>
   </ng-container>
@@ -28,9 +30,11 @@
     <app-card class="player" *ngIf="pick?.element == player?.id &&
       player?.element_type === 2 &&
       pick.position <= 11">
+      <p class="captains"> {{ pick.is_captain ? "C" : '' }}</p>
+      <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
       <p> {{ positions[player?.element_type - 1].singular_name_short }}</p>
       <p> {{ player.web_name }}</p>
-      <p> {{ player.event_points }}</p>
+      <p> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
     </app-card>
   </ng-container>
   </ng-container>
@@ -41,9 +45,11 @@
     <app-card class="player" *ngIf="pick?.element == player?.id &&
       player?.element_type === 3 &&
       pick.position <= 11">
+      <p class="captains"> {{ pick.is_captain ? "C" : '' }}</p>
+      <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
       <p> {{ positions[player?.element_type - 1].singular_name_short }}</p>
       <p> {{ player.web_name }}</p>
-      <p> {{ player.event_points }}</p>
+      <p> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
     </app-card>
   </ng-container>
   </ng-container>
@@ -54,9 +60,11 @@
   <app-card class="player" *ngIf="pick?.element == player?.id &&
     player?.element_type === 4 &&
     pick.position <= 11">
+    <p class="captains"> {{ pick.is_captain ? "C" : '' }}</p>
+    <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
     <p> {{ positions[player?.element_type - 1].singular_name_short }}</p>
     <p> {{ player.web_name }}</p>
-    <p> {{ player.event_points }}</p>
+    <p> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
   </app-card>
 </ng-container>
 </ng-container>
@@ -67,9 +75,11 @@
   <ng-container *ngFor="let pick of team?.picks; let i = index">
   <app-card class="player" *ngIf="pick?.element == player?.id &&
     pick.position == 12">
+    <p class="captains"> {{ pick.is_captain ? "C" : '' }}</p>
+    <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
     <p> {{ positions[player?.element_type - 1].singular_name_short }}</p>
     <p> {{ player.web_name }}</p>
-    <p> {{ player.event_points }}</p>
+    <p> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
   </app-card>
 </ng-container>
 </ng-container>
@@ -77,9 +87,11 @@
       <ng-container *ngFor="let pick of team?.picks; let i = index">
   <app-card class="player" *ngIf="pick?.element == player?.id &&
   pick.position == 13">
+  <p class="captains"> {{ pick.is_captain ? "C" : '' }}</p>
+  <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
   <p> {{ positions[player?.element_type - 1].singular_name_short }}</p>
   <p> {{ player.web_name }}</p>
-  <p> {{ player.event_points }}</p>
+  <p> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
 </app-card>
 </ng-container>
 </ng-container>
@@ -87,9 +99,11 @@
     <ng-container *ngFor="let pick of team?.picks; let i = index">
 <app-card class="player" *ngIf="pick?.element == player?.id &&
 pick.position == 14">
+<p class="captains"> {{ pick.is_captain ? "C" : '' }}</p>
+<p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
 <p> {{ positions[player?.element_type - 1].singular_name_short }}</p>
 <p> {{ player.web_name }}</p>
-<p> {{ player.event_points }}</p>
+<p> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
 </app-card>
 </ng-container>
 </ng-container>
@@ -97,9 +111,11 @@ pick.position == 14">
     <ng-container *ngFor="let pick of team?.picks; let i = index">
 <app-card class="player" *ngIf="pick?.element == player?.id &&
 pick.position == 15">
+<p class="captains"> {{ pick.is_captain ? "C" : '' }}</p>
+<p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
 <p> {{ positions[player?.element_type - 1].singular_name_short }}</p>
 <p> {{ player.web_name }}</p>
-<p> {{ player.event_points }}</p>
+<p> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
 </app-card>
   </ng-container>
 </ng-container>

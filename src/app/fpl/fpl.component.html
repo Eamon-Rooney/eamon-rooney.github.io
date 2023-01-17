@@ -72,7 +72,7 @@
     <li *ngFor="let user of standings | paginate: { itemsPerPage: 5, currentPage: p }">
       <a (click)="updateTeamNameStorage(user.entry_name, user.entry)" routerLink="/team/{{ user?.entry }}">
         <app-card>
-          <p> {{ user?.rank }} </p>
+          <p># {{ user?.rank }} </p>
           <p> {{ user?.entry_name }} </p>
           <p> {{ user?.event_total }} </p>
           <p> {{ user?.total }} </p>
