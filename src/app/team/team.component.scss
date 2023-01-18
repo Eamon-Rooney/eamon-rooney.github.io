@@ -8,7 +8,6 @@
   justify-content: space-around;
 }
 
-
 .subs {
   display: flex;
   flex-wrap: wrap;
@@ -21,12 +20,8 @@
 
 .player {
   ::ng-deep {
-    min-height: 100%;
-    width: 14%;
-
-    @media (max-width: 768px) {
-      margin: 10px auto;
-    }
+    margin: 10px 0;
+    padding: 0;
   }
 }
 
@@ -35,8 +30,17 @@
   position: absolute;
   color: green;
   background: yellow;
+  margin-top: 0;
 }
 
 .position {
-  margin-left: 5px;
+  margin: 0 0 0 5px;
+}
+
+.name {
+  margin: 0;
+}
+
+.points {
+  margin: 0;
 }
