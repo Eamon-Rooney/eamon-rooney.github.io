@@ -13,6 +13,9 @@ MIT
 @angular/router
 MIT
 
+@ngrx/store
+MIT
+
 ngx-pagination
 MIT
 

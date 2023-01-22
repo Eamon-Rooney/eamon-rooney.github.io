@@ -1,6 +1,9 @@
 <section>
 <h2>Players: {{ teamName }}</h2>
 
+<!-- <button ngDefaultControl [(ngModel)]="toogleCompareMode" class="button button-primary" (click)="toggleCompareMode()"> {{ toogleCompareMode}} compare to rivals</button> -->
+
+<ng-container *ngIf="toogleCompareMode === 'Show'">
 <Label>Switch Gameweek: </Label>
 <select [(ngModel)]="eventID" (ngModelChange)="updateGameweek()">
   <option *ngFor="let event of events; let i = index" [ngValue]="event.id"> {{ event.id }} </option>
@@ -80,7 +83,7 @@
     <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
     <img class="jersey" src="../../assets/shirts/{{player.team}}keep.webp" alt="{{player.webname}} jersey">
     <p class="name"> {{ player.web_name }}</p>
-    <p class="points"> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
+    <p class="points"> {{ player.event_points }}</p>
   </app-card>
 </ng-container>
 </ng-container>
@@ -92,7 +95,7 @@
   <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
   <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
   <p class="name"> {{ player.web_name }}</p>
-  <p class="points"> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
+  <p class="points"> {{ player.event_points }}</p>
 </app-card>
 </ng-container>
 </ng-container>
@@ -104,7 +107,7 @@ pick.position == 14">
 <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
 <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
 <p class="name"> {{ player.web_name }}</p>
-<p class="points"> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
+<p class="points"> {{ player.event_points }}</p>
 </app-card>
 </ng-container>
 </ng-container>
@@ -116,15 +119,16 @@ pick.position == 15">
 <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
 <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
 <p class="name"> {{ player.web_name }}</p>
-<p class="points"> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
+<p class="points"> {{ player.event_points }}</p>
 </app-card>
   </ng-container>
 </ng-container>
 </div>
-
+</ng-container>
 </section>
 
 <section>
+  <ng-container *ngIf="toogleCompareMode === 'Show'">
   <button ngDefaultControl [(ngModel)]="toogleTransfers" class="button button-primary" (click)="toggleGWTransfers()"> {{ toogleTransfers }} game week transfers</button>
 
   <ng-container *ngIf="toogleTransfers === 'Hide'">
@@ -149,4 +153,10 @@ pick.position == 15">
       </ng-container>
     </div>
   </ng-container>
+</ng-container>
 </section>
+
+
+<ng-container *ngIf="toogleCompareMode === 'Hide'">
+  <app-compare></app-compare>
+</ng-container>

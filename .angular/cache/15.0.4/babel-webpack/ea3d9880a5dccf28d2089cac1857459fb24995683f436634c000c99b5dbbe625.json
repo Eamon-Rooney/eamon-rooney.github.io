@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { createAction } from '@ngrx/store';\nexport const savePlayers = createAction('[Elements API] Add all Players', payload => ({\n  payload\n}));","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

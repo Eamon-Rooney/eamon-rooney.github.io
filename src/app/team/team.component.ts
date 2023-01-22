@@ -5,6 +5,9 @@ import { TeamService } from './team.service';
 import { EventList, Event, Bootstrap, ElementType } from 'app/interfaces/bootstrap';
 import { PicksList } from 'app/interfaces/picks';
 import { TransferList } from 'app/interfaces/transfers';
+import { Store } from '@ngrx/store';
+import { savePlayers } from 'app/State/compareActions';
+import { State } from 'app/State/compareReducer';
 
 @Component({
   selector: 'app-team',
@@ -16,7 +19,8 @@ export class TeamComponent implements OnInit {
   constructor(
     private _teamService: TeamService,
     private router: Router,
-    private _fplService: FplService) {}
+    private _fplService: FplService,
+    private store: Store<{ players: State }>) {}
 
   bootstrap!: Bootstrap;
   events!: Event | any;
@@ -33,6 +37,8 @@ export class TeamComponent implements OnInit {
 
   toogleTransfers: string = "Show";
 
+  toogleCompareMode: string = "Show";
+
   async ngOnInit() {
 
     (await this._fplService.getFplBootstrap())
@@ -44,6 +50,8 @@ export class TeamComponent implements OnInit {
 
       this.players = this.bootstrap.elements;
 
+      this.store.dispatch(savePlayers(this.players));
+
       this.positions = this.bootstrap.element_types;
     });
 
@@ -52,10 +60,9 @@ export class TeamComponent implements OnInit {
     this.eventID = this.gameweekID;
 
     (await this._teamService.getTeamPicks(this.teamID, this.gameweekID))
-    .subscribe(response => {
-      this.team = response,
-      console.log("this.team", this.team);
-    });
+    .subscribe(response =>
+      this.team = response
+    );
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
@@ -78,6 +85,10 @@ export class TeamComponent implements OnInit {
     .subscribe(response =>
       this.transfers = response
     );
+  }
+
+  toggleCompareMode() {
+    this.toogleCompareMode = this.toogleCompareMode === "Show" ? "Hide" : "Show";
   }
 }
 
