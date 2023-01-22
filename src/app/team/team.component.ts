@@ -6,8 +6,8 @@ import { EventList, Event, Bootstrap, ElementType } from 'app/interfaces/bootstr
 import { PicksList } from 'app/interfaces/picks';
 import { TransferList } from 'app/interfaces/transfers';
 import { Store } from '@ngrx/store';
-import { savePlayers } from 'app/State/compareActions';
-import { State } from 'app/State/compareReducer';
+import { addTeamPicks, savePlayers } from 'app/State/compareActions';
+import { CompareState } from 'app/State/compareReducer';
 
 @Component({
   selector: 'app-team',
@@ -20,7 +20,7 @@ export class TeamComponent implements OnInit {
     private _teamService: TeamService,
     private router: Router,
     private _fplService: FplService,
-    private store: Store<{ players: State }>) {}
+    private store: Store<{ compareState: CompareState }>) {}
 
   bootstrap!: Bootstrap;
   events!: Event | any;
@@ -60,9 +60,10 @@ export class TeamComponent implements OnInit {
     this.eventID = this.gameweekID;
 
     (await this._teamService.getTeamPicks(this.teamID, this.gameweekID))
-    .subscribe(response =>
-      this.team = response
-    );
+    .subscribe(response => {
+      this.team = response,
+      this.store.dispatch(addTeamPicks(this.team));
+    });
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;

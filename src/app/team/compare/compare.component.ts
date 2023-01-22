@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State } from 'app/State/compareReducer';
+import { CompareState } from 'app/State/compareReducer';
 
 
 @Component({
@@ -10,14 +10,17 @@ import { State } from 'app/State/compareReducer';
 })
 export class CompareComponent {
   elements!: any;
+  league!: any;
 
-  constructor(private store: Store<{ players: State }>) {
+  constructor(private store: Store<{ compareState: CompareState }>) {
   }
 
   ngOnInit() {
-    this.store.select('players').subscribe(players => {
-      this.elements = players.elements;
-      console.log("this.elements", this.elements);
+    this.store.select('compareState').subscribe(compareState => {
+      this.elements = compareState.elements;
+      this.league = compareState.league;
+      console.log("this.league", this.league);
+      console.log("this.store", this.store);
     });
   }
 
