@@ -48,7 +48,7 @@ const _compareReducer = createReducer(initialState,
   })),
   on(addTeamPicks, (state, {payload, teamID, teamName}) => ({
     ...state,
-    players: [...state.players, {
+    players: [{
       index: 0,
       key: teamID,
       name: teamName,

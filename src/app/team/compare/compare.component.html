@@ -1,4 +1,5 @@
 <div class="league" *ngFor="let teams of league; let i = index">
+  <h6>{{ teams.name }} Starting 11</h6>
  <div class="players">
   <ng-container *ngFor="let player of elements;">
     <ng-container *ngFor="let pick of teams.league.picks;">
