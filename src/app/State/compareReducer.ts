@@ -2,19 +2,28 @@ import { state } from '@angular/animations';
 import { Action, createReducer, on } from '@ngrx/store';
 import { ElementList } from 'app/interfaces/bootstrap';
 import { Pick, PicksList } from 'app/interfaces/picks';
-import { addTeamPicks, savePlayers } from '../State/compareActions';
+import { addCompareTeamPicks, addTeamPicks, savePlayers } from '../State/compareActions';
 
 export interface CompareState {
   elements: ElementList;
+  players: PlayerPicks[];
+}
+
+export interface PlayerPicks {
+  key: number;
+  name: string;
   league: PicksList;
 }
 
 const initialState: CompareState = {
   elements: [],
-  league: {
-    active_chip: '',
-    automatic_subs: [],
-    entry_history: {
+  players: [{
+    key: 0,
+    name: '',
+    league: {
+      active_chip: '',
+      automatic_subs: [],
+      entry_history: {
       event: 0,
       points: 0,
       total_points: 0,
@@ -26,9 +35,10 @@ const initialState: CompareState = {
       event_transfers: 0,
       event_transfers_cost: 0,
       points_on_bench: 0,
-    },
-    picks: []
-  }
+      },
+      picks: []
+    }
+  }]
 };
 
 const _compareReducer = createReducer(initialState,
@@ -36,9 +46,22 @@ const _compareReducer = createReducer(initialState,
     ...state,
     elements: payload
   })),
-  on(addTeamPicks, (state, {payload}) => ({
+  on(addTeamPicks, (state, {payload, teamID, teamName}) => ({
     ...state,
-    league: payload
+    players: [...state.players, {
+      index: 0,
+      key: teamID,
+      name: teamName,
+      league: payload
+    }]
+  })),
+  on(addCompareTeamPicks, (state, {payload, teamID, teamName}) => ({
+    ...state,
+    players: [...state.players, {
+      key: teamID,
+      name: teamName,
+      league: payload
+    }]
   }))
 );
 

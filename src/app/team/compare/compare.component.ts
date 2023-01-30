@@ -18,7 +18,7 @@ export class CompareComponent {
   ngOnInit() {
     this.store.select('compareState').subscribe(compareState => {
       this.elements = compareState.elements;
-      this.league = compareState.league;
+      this.league = compareState.players;
       console.log("this.league", this.league);
       console.log("this.store", this.store);
     });

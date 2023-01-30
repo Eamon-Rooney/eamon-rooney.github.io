@@ -1,6 +1,7 @@
-<div class="players">
-  <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let pick of league?.picks; let i = index">
+<div class="league" *ngFor="let teams of league; let i = index">
+ <div class="players">
+  <ng-container *ngFor="let player of elements;">
+    <ng-container *ngFor="let pick of teams.league.picks;">
     <app-card class="player" *ngIf="pick?.element == player?.id &&
       player?.element_type === 1 &&
       pick.position <= 11">
@@ -13,7 +14,7 @@
   </div>
   <div class="players">
   <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let pick of league?.picks; let i = index">
+      <ng-container *ngFor="let pick of teams.league.picks;">
     <app-card class="player" *ngIf="pick?.element == player?.id &&
       player?.element_type === 2 &&
       pick.position <= 11">
@@ -25,7 +26,7 @@
   </div>
   <div class="players">
   <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let pick of league?.picks; let i = index">
+      <ng-container *ngFor="let pick of teams.league.picks;">
     <app-card class="player" *ngIf="pick?.element == player?.id &&
       player?.element_type === 3 &&
       pick.position <= 11">
@@ -33,11 +34,11 @@
       <p class="name"> {{ player.web_name }}</p>
     </app-card>
   </ng-container>
-  </ng-container>
+</ng-container>
 </div>
 <div class="players">
 <ng-container *ngFor="let player of elements; let i = index">
-  <ng-container *ngFor="let pick of league?.picks; let i = index">
+    <ng-container *ngFor="let pick of teams.league.picks;">
   <app-card class="player" *ngIf="pick?.element == player?.id &&
     player?.element_type === 4 &&
     pick.position <= 11">
@@ -50,7 +51,7 @@
 <h6>Subs</h6>
 <div class="subs">
 <ng-container *ngFor="let player of elements; let i = index">
-  <ng-container *ngFor="let pick of league?.picks; let i = index">
+    <ng-container *ngFor="let pick of teams.league.picks;">
   <app-card class="player" *ngIf="pick?.element == player?.id &&
     pick.position == 12">
     <img class="jersey" src="../../assets/shirts/{{player.team}}keep.webp" alt="{{player.webname}} jersey">
@@ -59,7 +60,7 @@
 </ng-container>
 </ng-container>
     <ng-container *ngFor="let player of elements; let i = index">
-      <ng-container *ngFor="let pick of league?.picks; let i = index">
+        <ng-container *ngFor="let pick of teams.league.picks;">
   <app-card class="player" *ngIf="pick?.element == player?.id &&
   pick.position == 13">
   <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
@@ -68,7 +69,7 @@
 </ng-container>
 </ng-container>
   <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let pick of league?.picks; let i = index">
+      <ng-container *ngFor="let pick of teams.league.picks;">
 <app-card class="player" *ngIf="pick?.element == player?.id &&
 pick.position == 14">
 <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
@@ -77,11 +78,12 @@ pick.position == 14">
 </ng-container>
 </ng-container>
   <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let pick of league?.picks; let i = index">
+      <ng-container *ngFor="let pick of teams.league.picks;">
 <app-card class="player" *ngIf="pick?.element == player?.id &&
 pick.position == 15">
 <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
 </app-card>
   </ng-container>
 </ng-container>
+</div>
 </div>

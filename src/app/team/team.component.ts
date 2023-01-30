@@ -62,7 +62,7 @@ export class TeamComponent implements OnInit {
     (await this._teamService.getTeamPicks(this.teamID, this.gameweekID))
     .subscribe(response => {
       this.team = response,
-      this.store.dispatch(addTeamPicks(this.team));
+      this.store.dispatch(addTeamPicks(this.team, this.teamID, this.teamName));
     });
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
