@@ -62,6 +62,12 @@ const _compareReducer = createReducer(initialState,
   })),
 );
 
-export function reducer(state: CompareState | undefined, action: Action) {
-  return _compareReducer(state, action);
+export function reducer(state: CompareState | undefined, action: Action | any) {
+
+  if (state?.teams.find(teams => Object.keys(teams) == action.teamID)) {
+    return state;
+  } else {
+    return _compareReducer(state, action);
+  }
+
 }
