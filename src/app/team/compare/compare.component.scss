@@ -1,11 +1,13 @@
 .league {
  display: inline-block;
- width: 15%;
+ width: 20%;
 }
 
 .player {
   ::ng-deep {
     display: block;
+    margin: 0;
+    padding: 0;
   }
 }
 
