@@ -23,7 +23,9 @@
       <!-- <p class="position"> {{ positions[player?.element_type - 1].singular_name_short }}</p> -->
       <img class="jersey" src="../../assets/shirts/{{player.team}}keep.webp" alt="{{player.webname}} jersey">
       <p class="name"> {{ player.web_name }}</p>
-      <p class="points"> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
+      <p class="points" *ngIf="pick.multiplier == 1">{{player.event_points * 1 }}</p>
+      <p class="points" *ngIf="pick.multiplier == 2">{{player.event_points * 2 }}</p>
+      <p class="points" *ngIf="pick.multiplier == 3">{{player.event_points * 3 }}</p>
     </app-card>
   </ng-container>
   </ng-container>
@@ -38,7 +40,9 @@
       <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
       <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
       <p class="name"> {{ player.web_name }}</p>
-      <p class="points"> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
+      <p class="points" *ngIf="pick.multiplier == 1">{{player.event_points * 1 }}</p>
+      <p class="points" *ngIf="pick.multiplier == 2">{{player.event_points * 2 }}</p>
+      <p class="points" *ngIf="pick.multiplier == 3">{{player.event_points * 3 }}</p>
     </app-card>
   </ng-container>
   </ng-container>
@@ -53,7 +57,9 @@
       <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
       <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
       <p class="name"> {{ player.web_name }}</p>
-      <p class="points"> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
+      <p class="points" *ngIf="pick.multiplier == 1">{{player.event_points * 1 }}</p>
+      <p class="points" *ngIf="pick.multiplier == 2">{{player.event_points * 2 }}</p>
+      <p class="points" *ngIf="pick.multiplier == 3">{{player.event_points * 3 }}</p>
     </app-card>
   </ng-container>
   </ng-container>
@@ -68,7 +74,9 @@
     <p class="captains"> {{ pick.is_vice_captain ? "V" : '' }}</p>
     <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
     <p class="name"> {{ player.web_name }}</p>
-    <p class="points"> {{ (pick.multiplier == 1) ? player.event_points : player.event_points * 2 }}</p>
+    <p class="points" *ngIf="pick.multiplier == 1">{{player.event_points * 1 }}</p>
+    <p class="points" *ngIf="pick.multiplier == 2">{{player.event_points * 2 }}</p>
+    <p class="points" *ngIf="pick.multiplier == 3">{{player.event_points * 3 }}</p>
   </app-card>
 </ng-container>
 </ng-container>
