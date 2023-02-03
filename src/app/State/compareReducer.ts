@@ -2,11 +2,13 @@ import { state } from '@angular/animations';
 import { Action, createReducer, on } from '@ngrx/store';
 import { ElementList } from 'app/interfaces/bootstrap';
 import { Pick, PicksList } from 'app/interfaces/picks';
-import { addTeamPicks, savePlayers } from '../State/compareActions';
+import { Standings } from 'app/interfaces/standings';
+import { addLeagueTeams, addTeamPicks, savePlayers } from '../State/compareActions';
 
 export interface CompareState {
   elements: ElementList;
   teams: Teams[];
+  rivals: Standings["results"];
 }
 
 export interface Teams {
@@ -21,6 +23,7 @@ export interface PlayerPicks {
 const initialState: CompareState = {
   elements: [],
   teams: [],
+  rivals: [],
   // elements: [],
   // teams: [{
   // 0: {
@@ -59,6 +62,10 @@ const _compareReducer = createReducer(initialState,
         league: payload
       }
     }]
+  })),
+  on(addLeagueTeams, (state, {payload}) => ({
+    ...state,
+    rivals: payload
   })),
 );
 

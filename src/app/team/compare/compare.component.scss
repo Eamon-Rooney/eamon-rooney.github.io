@@ -3,6 +3,11 @@
  width: 20%;
 }
 
+.selectTeams label, .selectTeams select {
+  display: inline-block;
+  width: 20%;
+ }
+
 .player {
   ::ng-deep {
     display: block;

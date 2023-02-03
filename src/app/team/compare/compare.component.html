@@ -1,4 +1,22 @@
-<div class="league" *ngFor="let teams of league; let i = index">
+
+<div class="selectTeams">
+  <label>
+    {{ teamName }}
+  </label>
+  <select [(ngModel)]="teamID2" (ngModelChange)="getSelectedTeam(teamID2, 1)">
+    <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
+  </select>
+  <select [(ngModel)]="teamID3" (ngModelChange)="getSelectedTeam(teamID3, 2)">
+    <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
+  </select>
+  <select [(ngModel)]="teamID4" (ngModelChange)="getSelectedTeam(teamID4, 3)">
+    <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
+  </select>
+  <select [(ngModel)]="teamID5" (ngModelChange)="getSelectedTeam(teamID5, 4)">
+    <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
+  </select>
+</div>
+<div class="league" *ngFor="let teams of compareRivals; let i = index">
   <ng-container *ngFor="let picks of teams | keyvalue">
   <h6>{{ teams[$any(picks).key].name }} Starting 11</h6>
   </ng-container>
