@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Team } from 'app/interfaces/entry';
+import { PicksList } from 'app/interfaces/picks';
+import { Result } from 'app/interfaces/standings';
+import { addTeamPicks } from 'app/State/compareActions';
 import { CompareState } from 'app/State/compareReducer';
+import { TeamService } from '../team.service';
 
 
 @Component({
@@ -14,7 +19,8 @@ export class CompareComponent {
   standings!: any;
 
   teamID!: number;
-  teamName!: string | null;
+  teamName!: string;
+  gameweekID!: number;
 
   teamID2!: number;
   teamID3!: number;
@@ -23,7 +29,12 @@ export class CompareComponent {
 
   compareRivals!: any;
 
-  constructor(private store: Store<{ compareState: CompareState }>) {
+  team!: PicksList;
+
+  rival!: Result[];
+
+  constructor(private store: Store<{ compareState: CompareState }>,
+    private _teamService: TeamService) {
   }
 
   ngOnInit() {
@@ -44,43 +55,43 @@ export class CompareComponent {
       this.elements = compareState.elements;
       this.league = compareState.teams;
       this.standings = compareState.rivals;
-      console.log("this.elements", this.elements);
-      console.log("this.league", this.league);
-      console.log("this.standings", this.standings);
-      console.log("this.store", this.store);
 
       this.compareRivals = this.league.filter((a: any) => this.teamID in a);
-      console.log("COMPARERIVALS1", this.compareRivals);
     });
   }
 
   getSelectedTeam(rivalsID: number, index: number) {
-    this.store.select('compareState').subscribe(compareState => {
+    this.store.select('compareState').subscribe(async compareState => {
       this.elements = compareState.elements;
       this.league = compareState.teams;
       this.standings = compareState.rivals;
-      console.log("this.elements", this.elements);
-      console.log("this.league", this.league);
-      console.log("this.standings", this.standings);
-      console.log("this.store", this.store);
 
       // Take ID from dropdown
       // Lookup if ID exists in state
-      if (this.league.filter((a: any) => rivalsID in a)) {
+      if (this.league.filter((a: any) => rivalsID in a).length = 0) {
         // If exists add to existing array of leage clone
-        console.log("rivalsID", rivalsID);
-        console.log("index", index)
-        console.log("COMPARERIVALS2", this.compareRivals);
         this.compareRivals[index] = this.league.filter((a: any) => rivalsID in a)
           .reduce((rival: any) => {
             return rival;
         });
-        console.log("COMPARERIVALS3", this.compareRivals);
       } else {
         // If not, getCall to get team
+        const sessionGameWeekID = sessionStorage.getItem('GameWeekID');
+        this.gameweekID = sessionGameWeekID !== null ? JSON.parse(sessionGameWeekID) : '';
 
-        // Add data to state
-        // Add to existing array of leage clone
+        (await this._teamService.getTeamPicks(rivalsID, this.gameweekID))
+        .subscribe(response => {
+          this.team = response,
+          // Add data to state
+          this.rival = this.standings.filter((a: any) => a.entry == rivalsID);
+          this.store.dispatch(addTeamPicks(this.team, rivalsID, this.rival[0].entry_name));
+          this.league = compareState.teams;
+          // Add to existing array of leage clone
+          this.compareRivals[index] = this.league.filter((a: any) => rivalsID in a)
+            .reduce((rival: any) => {
+              return rival;
+          });
+        });
       }
     });
   }
