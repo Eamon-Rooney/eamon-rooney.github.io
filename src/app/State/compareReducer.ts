@@ -1,24 +1,57 @@
+import { state } from '@angular/animations';
 import { Action, createReducer, on } from '@ngrx/store';
 import { ElementList } from 'app/interfaces/bootstrap';
-import { savePlayers } from '../State/compareActions';
+import { Pick, PicksList } from 'app/interfaces/picks';
+import { Standings } from 'app/interfaces/standings';
+import { addLeagueTeams, addTeamPicks, savePlayers } from '../State/compareActions';
 
-export interface State {
+export interface CompareState {
   elements: ElementList;
+  teams: Teams[];
+  rivals: Standings["results"];
 }
 
-const initialState: State = {
-  elements: []
+export interface Teams {
+  [key: number]: PlayerPicks;
+}
+
+export interface PlayerPicks {
+  name: string;
+  league: PicksList;
+}
+
+const initialState: CompareState = {
+  elements: [],
+  teams: [],
+  rivals: [],
 };
 
 const _compareReducer = createReducer(initialState,
   on(savePlayers, (state, {payload}) => ({
     ...state,
     elements: payload
-  }))
+  })),
+  on(addTeamPicks, (state, {payload, teamID, teamName}) => ({
+    ...state,
+    teams: [...state.teams, {
+      [teamID]: {
+        name: teamName,
+        league: payload
+      }
+    }]
+  })),
+  on(addLeagueTeams, (state, {payload}) => ({
+    ...state,
+    rivals: payload
+  })),
 );
 
-export function reducer(state: State | undefined, action: Action) {
-  console.log("reducer state", state);
-  console.log("reducer action", action);
-  return _compareReducer(state, action);
+export function reducer(state: CompareState | undefined, action: Action | any) {
+
+  if (state?.teams.find(teams => Object.keys(teams) == action.teamID)) {
+    return state;
+  } else {
+    return _compareReducer(state, action);
+  }
+
 }

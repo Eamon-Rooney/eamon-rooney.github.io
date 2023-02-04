@@ -28,7 +28,7 @@ import { reducer } from './State/compareReducer';
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ players: reducer })
+    StoreModule.forRoot({ compareState: reducer })
   ],
   providers: [],
   bootstrap: [AppComponent]

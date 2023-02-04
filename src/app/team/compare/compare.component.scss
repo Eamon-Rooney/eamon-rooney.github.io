@@ -1,0 +1,27 @@
+.league {
+ display: inline-block;
+ width: 20%;
+}
+
+.selectTeams label, .selectTeams select {
+  display: inline-block;
+  width: 20%;
+ }
+
+.player {
+  ::ng-deep {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.name {
+  margin: 0;
+}
+
+h6 {
+  padding: 0;
+  padding: 20px;
+  text-align: center;
+}

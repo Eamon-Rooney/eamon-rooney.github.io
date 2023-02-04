@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Bootstrap, Event, EventList, Teams } from 'app/interfaces/bootstrap';
 import { FixturesList } from 'app/interfaces/fixtures';
 import { TeamComponent } from 'app/team/team.component';
+import { addLeagueTeams } from 'app/State/compareActions';
+import { Store } from '@ngrx/store';
+import { CompareState } from 'app/State/compareReducer';
 
 @Component({
   selector: 'app-fpl',
@@ -39,6 +42,7 @@ export class FplComponent implements OnInit {
   doubleGameWeekMap!: any;
 
   constructor(private _fplService: FplService,
+    private store: Store<{ compareState: CompareState }>,
     formBuilder: FormBuilder) {
       this.leagueForm = formBuilder.group({
         leagueID: [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]*$/)])],
@@ -51,6 +55,7 @@ export class FplComponent implements OnInit {
     .subscribe(response => {
       this.league = response;
       this.standings = this.league.standings.results;
+      this.store.dispatch(addLeagueTeams(this.standings));
     }, error => {
       this.standingsErrors = error;
     },);
