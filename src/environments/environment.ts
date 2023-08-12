@@ -9,7 +9,7 @@ export const environment = {
 
   fpl: {
     bootstrap: (corsanywhere + 'bootstrap-static/'),
-    league: (corsanywhere + 'leagues-classic/1051448/standings/'),
+    league: (corsanywhere + 'leagues-classic/517177/standings/'),
     fixtures: (corsanywhere + 'fixtures/?event='),
   },
   team: {
