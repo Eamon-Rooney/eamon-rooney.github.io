@@ -65,6 +65,11 @@ export class TeamComponent implements OnInit {
       this.store.dispatch(addTeamPicks(this.team, this.teamID, this.teamName));
     });
 
+    (await this._teamService.getTeamTransfers(this.teamID))
+    .subscribe(response =>
+      this.transfers = response
+    );
+
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     }
@@ -81,11 +86,6 @@ export class TeamComponent implements OnInit {
 
   async toggleGWTransfers() {
     this.toogleTransfers = this.toogleTransfers === "Show" ? "Hide" : "Show";
-
-    (await this._teamService.getTeamTransfers(this.teamID))
-    .subscribe(response =>
-      this.transfers = response
-    );
   }
 
   toggleCompareMode() {

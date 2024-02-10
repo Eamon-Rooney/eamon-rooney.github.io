@@ -26,6 +26,11 @@
       <p class="points" *ngIf="pick.multiplier == 1">{{player.event_points * 1 }}</p>
       <p class="points" *ngIf="pick.multiplier == 2">{{player.event_points * 2 }}</p>
       <p class="points" *ngIf="pick.multiplier == 3">{{player.event_points * 3 }}</p>
+      <ng-container *ngFor="let transfer of transfers">
+      <ng-container *ngIf="transfer?.element_in === pick?.element">
+        <p class="name">GW{{ transfer.event }}|{{ transfer.element_in_cost / 10 | number : '1.1-1' }}</p>
+      </ng-container>
+      </ng-container>
     </app-card>
   </ng-container>
   </ng-container>
@@ -43,6 +48,11 @@
       <p class="points" *ngIf="pick.multiplier == 1">{{player.event_points * 1 }}</p>
       <p class="points" *ngIf="pick.multiplier == 2">{{player.event_points * 2 }}</p>
       <p class="points" *ngIf="pick.multiplier == 3">{{player.event_points * 3 }}</p>
+      <ng-container *ngFor="let transfer of transfers">
+        <ng-container *ngIf="transfer?.element_in === pick?.element">
+          <p class="name">GW{{ transfer.event }}|{{ transfer.element_in_cost / 10 | number : '1.1-1' }}</p>
+      </ng-container>
+      </ng-container>
     </app-card>
   </ng-container>
   </ng-container>
@@ -60,6 +70,10 @@
       <p class="points" *ngIf="pick.multiplier == 1">{{player.event_points * 1 }}</p>
       <p class="points" *ngIf="pick.multiplier == 2">{{player.event_points * 2 }}</p>
       <p class="points" *ngIf="pick.multiplier == 3">{{player.event_points * 3 }}</p>
+      <ng-container *ngFor="let transfer of transfers">
+        <ng-container *ngIf="transfer?.element_in === pick?.element">
+        <p class="name">GW{{ transfer.event }}|{{ transfer.element_in_cost / 10 | number : '1.1-1' }}</p>      </ng-container>
+      </ng-container>
     </app-card>
   </ng-container>
   </ng-container>
@@ -77,6 +91,11 @@
     <p class="points" *ngIf="pick.multiplier == 1">{{player.event_points * 1 }}</p>
     <p class="points" *ngIf="pick.multiplier == 2">{{player.event_points * 2 }}</p>
     <p class="points" *ngIf="pick.multiplier == 3">{{player.event_points * 3 }}</p>
+    <ng-container *ngFor="let transfer of transfers">
+      <ng-container *ngIf="transfer?.element_in === pick?.element">
+        <p class="name">GW{{ transfer.event }}|{{ transfer.element_in_cost / 10 | number : '1.1-1' }}</p>
+    </ng-container>
+    </ng-container>
   </app-card>
 </ng-container>
 </ng-container>
@@ -92,6 +111,11 @@
     <img class="jersey" src="../../assets/shirts/{{player.team}}keep.webp" alt="{{player.webname}} jersey">
     <p class="name"> {{ player.web_name }}</p>
     <p class="points"> {{ player.event_points }}</p>
+    <ng-container *ngFor="let transfer of transfers">
+      <ng-container *ngIf="transfer?.element_in === pick?.element">
+        <p class="name">GW{{ transfer.event }}|{{ transfer.element_in_cost / 10 | number : '1.1-1' }}</p>
+    </ng-container>
+    </ng-container>
   </app-card>
 </ng-container>
 </ng-container>
@@ -104,6 +128,11 @@
   <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
   <p class="name"> {{ player.web_name }}</p>
   <p class="points"> {{ player.event_points }}</p>
+  <ng-container *ngFor="let transfer of transfers">
+  <ng-container *ngIf="transfer?.element_in === pick?.element">
+    <p class="name">GW{{ transfer.event }}|{{ transfer.element_in_cost / 10 | number : '1.1-1' }}</p>
+  </ng-container>
+  </ng-container>
 </app-card>
 </ng-container>
 </ng-container>
@@ -116,6 +145,11 @@ pick.position == 14">
 <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
 <p class="name"> {{ player.web_name }}</p>
 <p class="points"> {{ player.event_points }}</p>
+<ng-container *ngFor="let transfer of transfers">
+<ng-container *ngIf="transfer?.element_in === pick?.element">
+  <p class="name">GW{{ transfer.event }}|{{ transfer.element_in_cost / 10 | number : '1.1-1' }}</p>
+</ng-container>
+</ng-container>
 </app-card>
 </ng-container>
 </ng-container>
@@ -128,6 +162,11 @@ pick.position == 15">
 <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
 <p class="name"> {{ player.web_name }}</p>
 <p class="points"> {{ player.event_points }}</p>
+<ng-container *ngFor="let transfer of transfers">
+<ng-container *ngIf="transfer?.element_in === pick?.element">
+    <p class="name">GW{{ transfer.event }}|{{ transfer.element_in_cost / 10 | number : '1.1-1' }}</p>
+</ng-container>
+</ng-container>
 </app-card>
   </ng-container>
 </ng-container>
