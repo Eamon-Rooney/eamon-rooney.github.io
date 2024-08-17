@@ -1,27 +1,51 @@
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  padding: 0;
-  align-content: flex-start;
-  align-items: stretch;
-  justify-content: space-around;
+.team-list-item {
+  display: block;
+  margin-bottom: 10px;
 }
 
-li {
-  list-style: none;
-
-  ::ng-deep {
-    width: 100%;
-    min-height: 100%;
-    @media (min-width: 768px) {
-      max-width: 20%;
-    }
-  }
+ul {
+  list-style-type: none;
+  padding: 0; /* Optional: Remove default padding */
 }
 
 .error {
   color: #D8000C;
   background-color: #FFBABA;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+thead app-card, tbody app-card {
+  display: contents; /* Ensures the app-card component does not interfere with table layout */
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+tr {
+  cursor: pointer;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
 }

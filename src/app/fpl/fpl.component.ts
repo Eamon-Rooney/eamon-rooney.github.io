@@ -8,6 +8,7 @@ import { TeamComponent } from 'app/team/team.component';
 import { addLeagueTeams } from 'app/State/compareActions';
 import { Store } from '@ngrx/store';
 import { CompareState } from 'app/State/compareReducer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fpl',
@@ -42,6 +43,7 @@ export class FplComponent implements OnInit {
   doubleGameWeekMap!: any;
 
   constructor(private _fplService: FplService,
+    private router: Router,
     private store: Store<{ compareState: CompareState }>,
     formBuilder: FormBuilder) {
       this.leagueForm = formBuilder.group({
@@ -136,6 +138,11 @@ export class FplComponent implements OnInit {
   updateTeamNameStorage(teamName: string, teamID: number) {
     sessionStorage.setItem('TeamName', JSON.stringify(teamName));
     sessionStorage.setItem('TeamID', JSON.stringify(teamID));
+  }
+
+  navigateToTeam(user: any) {
+    this.updateTeamNameStorage(user.entry_name, user.entry);
+    this.router.navigate(['/team', user.entry]);
   }
 
   onOutletLoaded(component: TeamComponent) {

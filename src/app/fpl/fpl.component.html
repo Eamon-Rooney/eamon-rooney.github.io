@@ -68,18 +68,28 @@
 <section>
   <h2>League Name: {{ league.league.name }}</h2>
 
-  <ul>
-    <li *ngFor="let user of standings | paginate: { itemsPerPage: 5, currentPage: p }">
-      <a (click)="updateTeamNameStorage(user.entry_name, user.entry)" routerLink="/team/{{ user?.entry }}">
+  <table>
+    <thead>
+      <tr>
         <app-card>
-          <p># {{ user?.rank }} </p>
-          <p> {{ user?.entry_name }} </p>
-          <p> {{ user?.event_total }} </p>
-          <p> {{ user?.total }} </p>
+          <th>#</th>
+          <th>Team Name</th>
+          <th>Event Total</th>
+          <th>Total</th>
         </app-card>
-      </a>
-    </li>
-  </ul>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of standings | paginate: { itemsPerPage: 10, currentPage: p }" (click)="navigateToTeam(user)">
+        <app-card>
+          <td>{{ user?.rank }}</td>
+          <td>{{ user?.entry_name }}</td>
+          <td>{{ user?.event_total }}</td>
+          <td>{{ user?.total }}</td>
+        </app-card>
+      </tr>
+    </tbody>
+  </table>
 
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </section>
