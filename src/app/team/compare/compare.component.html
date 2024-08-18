@@ -1,125 +1,138 @@
 
-<div class="selectTeams">
-  <label>
-    {{ teamName }}
-  </label>
-  <select [(ngModel)]="teamID2" (ngModelChange)="getSelectedTeam(teamID2, 1)">
-    <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
-  </select>
-  <select [(ngModel)]="teamID3" (ngModelChange)="getSelectedTeam(teamID3, 2)">
-    <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
-  </select>
-  <select [(ngModel)]="teamID4" (ngModelChange)="getSelectedTeam(teamID4, 3)">
-    <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
-  </select>
-  <select [(ngModel)]="teamID5" (ngModelChange)="getSelectedTeam(teamID5, 4)">
-    <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
-  </select>
-</div>
-<div class="league" *ngFor="let teams of compareRivals; let i = index">
-  <ng-container *ngFor="let picks of teams | keyvalue">
-  <h6>{{ teams[$any(picks).key].name }} Starting 11</h6>
-  </ng-container>
-  <div class="players">
-    <ng-container *ngFor="let player of elements;">
-    <ng-container *ngFor="let picks of teams | keyvalue">
-    <ng-container *ngFor=" let pick of teams[$any(picks).key].league.picks">
-      <app-card class="player" *ngIf="pick?.element == player?.id &&
-        player?.element_type === 1 && pick.position <= 11">
-        <!-- <p class="position"> {{ positions[player?.element_type - 1].singular_name_short }}</p> -->
-        <img class="jersey" src="../../assets/shirts/{{player.team}}keep.webp" alt="{{player.webname}} jersey">
-        <p class="name"> {{ player.web_name }}</p>
-      </app-card>
-    </ng-container>
-    </ng-container>
-    </ng-container>
-  </div>
-  <div class="players">
-    <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let picks of teams | keyvalue">
-    <ng-container *ngFor=" let pick of teams[$any(picks).key].league.picks">
-      <app-card class="player" *ngIf="pick?.element == player?.id &&
-        player?.element_type === 2 && pick.position <= 11">
-         <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
-          <p class="name"> {{ player.web_name }}</p>
-      </app-card>
-    </ng-container>
-    </ng-container>
-    </ng-container>
-  </div>
-  <div class="players">
-    <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let picks of teams | keyvalue">
-    <ng-container *ngFor=" let pick of teams[$any(picks).key].league.picks">
-      <app-card class="player" *ngIf="pick?.element == player?.id &&
-        player?.element_type === 3 && pick.position <= 11">
-        <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
-        <p class="name"> {{ player.web_name }}</p>
-      </app-card>
-    </ng-container>
-    </ng-container>
-    </ng-container>
-  </div>
-  <div class="players">
-    <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let picks of teams | keyvalue">
-    <ng-container *ngFor=" let pick of teams[$any(picks).key].league.picks">
-      <app-card class="player" *ngIf="pick?.element == player?.id &&
-        player?.element_type === 4 && pick.position <= 11">
-        <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
-        <p class="name"> {{ player.web_name }}</p>
-      </app-card>
-    </ng-container>
-    </ng-container>
-    </ng-container>
-  </div>
-  <ng-container *ngFor="let picks of teams | keyvalue">
-    <h6>{{ teams[$any(picks).key].name }} Subs</h6>
-  </ng-container>
-  <div class="subs">
-    <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let picks of teams | keyvalue">
-    <ng-container *ngFor=" let pick of teams[$any(picks).key].league.picks">
-      <app-card class="player" *ngIf="pick?.element == player?.id &&
-        pick.position == 12">
-        <img class="jersey" src="../../assets/shirts/{{player.team}}keep.webp" alt="{{player.webname}} jersey">
-        <p class="name"> {{ player.web_name }}</p>
-      </app-card>
-    </ng-container>
-    </ng-container>
-    </ng-container>
-    <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let picks of teams | keyvalue">
-    <ng-container *ngFor=" let pick of teams[$any(picks).key].league.picks">
-      <app-card class="player" *ngIf="pick?.element == player?.id &&
-        pick.position == 13">
-        <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
-        <p class="name"> {{ player.web_name }}</p>
-      </app-card>
-    </ng-container>
-    </ng-container>
-    </ng-container>
-    <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let picks of teams | keyvalue">
-    <ng-container *ngFor=" let pick of teams[$any(picks).key].league.picks">
-      <app-card class="player" *ngIf="pick?.element == player?.id &&
-        pick.position == 14">
-        <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
-        <p class="name"> {{ player.web_name }}</p>
-      </app-card>
-    </ng-container>
-    </ng-container>
-    </ng-container>
-    <ng-container *ngFor="let player of elements; let i = index">
-    <ng-container *ngFor="let picks of teams | keyvalue">
-    <ng-container *ngFor=" let pick of teams[$any(picks).key].league.picks">
-      <app-card class="player" *ngIf="pick?.element == player?.id &&
-        pick.position == 15">
-        <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
-        <p class="name"> {{ player.web_name }}</p>
-      </app-card>
-    </ng-container>
-    </ng-container>
-    </ng-container>
-  </div>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th class="fixed-width">{{ teamName }}</th>
+      <th class="fixed-width">
+        <select [(ngModel)]="teamID2" (ngModelChange)="getSelectedTeam(teamID2, 1)">
+          <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
+        </select>
+      </th>
+      <th class="fixed-width">
+        <select [(ngModel)]="teamID3" (ngModelChange)="getSelectedTeam(teamID3, 2)">
+          <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
+        </select>
+      </th>
+      <th class="fixed-width">
+        <select [(ngModel)]="teamID4" (ngModelChange)="getSelectedTeam(teamID4, 3)">
+          <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
+        </select>
+      </th>
+      <th class="fixed-width">
+        <select [(ngModel)]="teamID5" (ngModelChange)="getSelectedTeam(teamID5, 4)">
+          <option *ngFor="let standing of standings; let i = index" [ngValue]="standing.entry"> {{ standing.entry_name }} </option>
+        </select>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="5">
+        <div class="league" *ngFor="let teams of compareRivals; let i = index">
+          <ng-container *ngFor="let picks of teams | keyvalue">
+            <h6>{{ teams[$any(picks).key].name }} Starting 11</h6>
+          </ng-container>
+          <div class="players">
+            <ng-container *ngFor="let player of elements;">
+              <ng-container *ngFor="let picks of teams | keyvalue">
+                <ng-container *ngFor="let pick of teams[$any(picks).key].league.picks">
+                  <app-card class="player" *ngIf="pick?.element == player?.id && player?.element_type === 1 && pick.position <= 11">
+                    <img class="jersey" src="../../assets/shirts/{{player.team}}keep.webp" alt="{{player.webname}} jersey">
+                    <p class="name">{{ player.web_name }}</p>
+                  </app-card>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </div>
+          <div class="players">
+            <ng-container *ngFor="let player of elements; let i = index">
+              <ng-container *ngFor="let picks of teams | keyvalue">
+                <ng-container *ngFor="let pick of teams[$any(picks).key].league.picks">
+                  <app-card class="player" *ngIf="pick?.element == player?.id && player?.element_type === 2 && pick.position <= 11">
+                    <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
+                    <p class="name">{{ player.web_name }}</p>
+                  </app-card>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </div>
+          <div class="players">
+            <ng-container *ngFor="let player of elements; let i = index">
+              <ng-container *ngFor="let picks of teams | keyvalue">
+                <ng-container *ngFor="let pick of teams[$any(picks).key].league.picks">
+                  <app-card class="player" *ngIf="pick?.element == player?.id && player?.element_type === 3 && pick.position <= 11">
+                    <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
+                    <p class="name">{{ player.web_name }}</p>
+                  </app-card>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </div>
+          <div class="players">
+            <ng-container *ngFor="let player of elements; let i = index">
+              <ng-container *ngFor="let picks of teams | keyvalue">
+                <ng-container *ngFor="let pick of teams[$any(picks).key].league.picks">
+                  <app-card class="player" *ngIf="pick?.element == player?.id && player?.element_type === 4 && pick.position <= 11">
+                    <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
+                    <p class="name">{{ player.web_name }}</p>
+                  </app-card>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="5">
+        <div class="league" *ngFor="let teams of compareRivals; let i = index">
+        <ng-container *ngFor="let picks of teams | keyvalue">
+          <h6>{{ teams[$any(picks).key].name }} Subs</h6>
+        </ng-container>
+        <div class="subs">
+          <ng-container *ngFor="let player of elements; let i = index">
+            <ng-container *ngFor="let picks of teams | keyvalue">
+              <ng-container *ngFor="let pick of teams[$any(picks).key].league.picks">
+                <app-card class="player" *ngIf="pick?.element == player?.id && pick.position == 12">
+                  <img class="jersey" src="../../assets/shirts/{{player.team}}keep.webp" alt="{{player.webname}} jersey">
+                  <p class="name">{{ player.web_name }}</p>
+                </app-card>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngFor="let player of elements; let i = index">
+            <ng-container *ngFor="let picks of teams | keyvalue">
+              <ng-container *ngFor="let pick of teams[$any(picks).key].league.picks">
+                <app-card class="player" *ngIf="pick?.element == player?.id && pick.position == 13">
+                  <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
+                  <p class="name">{{ player.web_name }}</p>
+                </app-card>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngFor="let player of elements; let i = index">
+            <ng-container *ngFor="let picks of teams | keyvalue">
+              <ng-container *ngFor="let pick of teams[$any(picks).key].league.picks">
+                <app-card class="player" *ngIf="pick?.element == player?.id && pick.position == 14">
+                  <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
+                  <p class="name">{{ player.web_name }}</p>
+                </app-card>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngFor="let player of elements; let i = index">
+            <ng-container *ngFor="let picks of teams | keyvalue">
+              <ng-container *ngFor="let pick of teams[$any(picks).key].league.picks">
+                <app-card class="player" *ngIf="pick?.element == player?.id && pick.position == 15">
+                  <img class="jersey" src="../../assets/shirts/{{player.team}}out.webp" alt="{{player.webname}} jersey">
+                  <p class="name">{{ player.web_name }}</p>
+                </app-card>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
